@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English Tenses — Interactive Learning Module</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--primary:#2563eb;--primary-dark:#1d4ed8;--primary-light:#dbeafe;--secondary:#10b981;--secondary-light:#d1fae5;--amber:#f59e0b;--amber-light:#fef3c7;--red:#ef4444;--red-light:#fee2e2;--gray-50:#f8fafc;--gray-100:#f1f5f9;--gray-200:#e2e8f0;--gray-300:#cbd5e1;--gray-400:#94a3b8;--gray-500:#64748b;--gray-600:#475569;--gray-700:#334155;--gray-800:#1e293b;--gray-900:#0f172a;--shadow-sm:0 1px 2px rgba(0,0,0,.05);--shadow:0 1px 3px rgba(0,0,0,.1),0 1px 2px rgba(0,0,0,.06);--shadow-md:0 4px 6px rgba(0,0,0,.07),0 2px 4px rgba(0,0,0,.06);--shadow-lg:0 10px 15px rgba(0,0,0,.1),0 4px 6px rgba(0,0,0,.05);--radius:8px;--radius-lg:12px;--transition:.2s ease}
+html{scroll-behavior:smooth}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--gray-50);color:var(--gray-800);line-height:1.6;min-height:100vh}
+/* HEADER */
+.app-header{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;position:fixed;top:0;left:0;right:0;z-index:100;box-shadow:var(--shadow-md)}
+.app-header .logo{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:700;letter-spacing:-.3px}
+.app-header .logo svg{width:28px;height:28px}
+.header-right{display:flex;align-items:center;gap:16px}
+.header-progress{display:flex;align-items:center;gap:8px;font-size:13px;background:rgba(255,255,255,.15);padding:6px 14px;border-radius:20px}
+.header-progress .progress-num{font-weight:600}
+.hamburger{display:none;background:none;border:none;color:#fff;font-size:24px;cursor:pointer;padding:4px}
+/* LAYOUT */
+.app-layout{display:flex;padding-top:64px;min-height:100vh}
+/* SIDEBAR */
+.sidebar{width:240px;flex-shrink:0;background:#fff;border-right:1px solid var(--gray-200);padding:16px 0;position:fixed;top:64px;bottom:0;overflow-y:auto;z-index:50}
+.sidebar::-webkit-scrollbar{width:4px}
+.sidebar::-webkit-scrollbar-thumb{background:var(--gray-300);border-radius:4px}
+.sidebar-section{padding:0 12px;margin-bottom:8px}
+.sidebar-section .section-label{font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:var(--gray-400);font-weight:600;padding:8px 12px 4px}
+.sidebar-item{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:var(--radius);cursor:pointer;transition:var(--transition);font-size:14px;color:var(--gray-600);text-decoration:none;border:none;background:none;width:100%;text-align:left}
+.sidebar-item:hover{background:var(--gray-100);color:var(--gray-800)}
+.sidebar-item.active{background:var(--primary-light);color:var(--primary);font-weight:600}
+.sidebar-item .status-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;background:var(--gray-300)}
+.sidebar-item .status-dot.completed{background:var(--secondary)}
+.sidebar-item .status-dot.in-progress{background:var(--amber)}
+.sidebar-item .status-dot.locked{background:var(--gray-300)}
+.sidebar-divider{height:1px;background:var(--gray-200);margin:8px 12px}
+/* MAIN */
+.main-content{flex:1;margin-left:240px;padding:32px 40px;max-width:960px}
+.main-content.wide{max-width:1100px}
+/* BREADCRUMB */
+.breadcrumb{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--gray-400);margin-bottom:16px;flex-wrap:wrap}
+.breadcrumb span{cursor:pointer;transition:var(--transition)}
+.breadcrumb span:hover{color:var(--primary)}
+.breadcrumb .sep{color:var(--gray-300)}
+/* SECTION CARDS */
+.section-card{background:#fff;border-radius:var(--radius-lg);box-shadow:var(--shadow);padding:28px 32px;margin-bottom:24px;border:1px solid var(--gray-200)}
+.section-card h2{font-size:24px;font-weight:700;color:var(--gray-900);margin-bottom:6px}
+.section-card h2 .badge{display:inline-block;font-size:12px;background:var(--primary-light);color:var(--primary);padding:2px 10px;border-radius:12px;font-weight:600;margin-left:8px;vertical-align:middle}
+.section-card .subtitle{color:var(--gray-500);font-size:15px;margin-bottom:20px}
+/* ACCORDION */
+.accordion{margin-top:16px}
+.accordion-item{border:1px solid var(--gray-200);border-radius:var(--radius);margin-bottom:8px;overflow:hidden}
+.accordion-header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:var(--gray-50);cursor:pointer;transition:var(--transition);border:none;width:100%;text-align:left;font-size:15px;font-weight:600;color:var(--gray-700)}
+.accordion-header:hover{background:var(--gray-100)}
+.accordion-header .icon{transition:transform .25s;font-size:12px;color:var(--gray-400)}
+.accordion-item.open .accordion-header .icon{transform:rotate(180deg)}
+.accordion-body{padding:0 18px;max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s ease}
+.accordion-item.open .accordion-body{max-height:600px;padding:14px 18px}
+.accordion-body p{margin-bottom:8px;font-size:14px;color:var(--gray-600);line-height:1.7}
+.accordion-body ul{margin:4px 0 8px 16px;font-size:14px;color:var(--gray-600)}
+.accordion-body ul li{margin-bottom:4px}
+/* EXAMPLE BOX */
+.example-box{background:var(--primary-light);border-left:3px solid var(--primary);padding:12px 16px;border-radius:0 var(--radius) var(--radius) 0;margin:8px 0}
+.example-box p{margin-bottom:4px;font-size:14px}
+.example-box .label{font-weight:600;color:var(--primary);font-size:12px;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+/* MISTAKE BOX */
+.mistake-box{background:var(--red-light);border-left:3px solid var(--red);padding:12px 16px;border-radius:0 var(--radius) var(--radius) 0;margin:8px 0}
+.mistake-box .label{font-weight:600;color:var(--red);font-size:12px;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.mistake-box .wrong{text-decoration:line-through;color:var(--red)}
+.mistake-box .correct{color:var(--secondary);font-weight:600}
+/* COMPARE BOX */
+.compare-box{background:var(--amber-light);border-left:3px solid var(--amber);padding:12px 16px;border-radius:0 var(--radius) var(--radius) 0;margin:8px 0}
+.compare-box .label{font-weight:600;color:var(--amber);font-size:12px;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+/* SIGNAL WORDS */
+.signal-tags{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.signal-tags span{background:var(--gray-100);color:var(--gray-600);padding:3px 10px;border-radius:12px;font-size:13px;border:1px solid var(--gray-200)}
+/* TABS */
+.tab-bar{display:flex;gap:4px;margin-bottom:20px;border-bottom:2px solid var(--gray-200);padding-bottom:0}
+.tab-btn{padding:10px 20px;border:none;background:none;cursor:pointer;font-size:14px;font-weight:500;color:var(--gray-500);border-bottom:2px solid transparent;margin-bottom:-2px;transition:var(--transition)}
+.tab-btn:hover{color:var(--gray-700)}
+.tab-btn.active{color:var(--primary);border-bottom-color:var(--primary);font-weight:600}
+/* QUIZ */
+.quiz-container{margin-top:8px}
+.quiz-question{margin-bottom:20px;padding:16px;border:1px solid var(--gray-200);border-radius:var(--radius);background:var(--gray-50)}
+.quiz-question .q-text{font-size:15px;font-weight:600;color:var(--gray-800);margin-bottom:10px}
+.quiz-question .q-text .q-num{color:var(--primary);margin-right:6px}
+.quiz-options{display:flex;flex-direction:column;gap:6px}
+.quiz-option{display:flex;align-items:center;gap:8px;padding:10px 14px;border:2px solid var(--gray-200);border-radius:var(--radius);cursor:pointer;transition:var(--transition);background:#fff;font-size:14px}
+.quiz-option:hover{border-color:var(--primary);background:var(--primary-light)}
+.quiz-option.selected{border-color:var(--primary);background:var(--primary-light)}
+.quiz-option.correct{border-color:var(--secondary);background:var(--secondary-light)}
+.quiz-option.wrong{border-color:var(--red);background:var(--red-light)}
+.quiz-option .letter{width:24px;height:24px;border-radius:50%;background:var(--gray-100);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:var(--gray-500);flex-shrink:0}
+.quiz-option.selected .letter{background:var(--primary);color:#fff}
+.quiz-option.correct .letter{background:var(--secondary);color:#fff}
+.quiz-option.wrong .letter{background:var(--red);color:#fff}
+.quiz-option.disabled{cursor:default;opacity:.7}
+.quiz-option.disabled:hover{border-color:var(--gray-200);background:#fff}
+.quiz-feedback{font-size:13px;margin-top:8px;padding:8px 12px;border-radius:var(--radius);display:none}
+.quiz-feedback.show{display:block}
+.quiz-feedback.correct{background:var(--secondary-light);color:#065f46}
+.quiz-feedback.wrong{background:var(--red-light);color:#991b1b}
+.quiz-controls{display:flex;gap:8px;margin-top:4px}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 20px;border-radius:var(--radius);font-size:14px;font-weight:600;cursor:pointer;transition:var(--transition);border:none;text-decoration:none}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-primary:hover{background:var(--primary-dark)}
+.btn-primary:disabled{background:var(--gray-300);cursor:not-allowed}
+.btn-secondary{background:var(--gray-100);color:var(--gray-700);border:1px solid var(--gray-200)}
+.btn-secondary:hover{background:var(--gray-200)}
+.btn-success{background:var(--secondary);color:#fff}
+.btn-success:hover{background:#059669}
+.btn-outline{background:transparent;color:var(--primary);border:2px solid var(--primary)}
+.btn-outline:hover{background:var(--primary-light)}
+.btn-sm{padding:6px 14px;font-size:13px}
+/* SCORE BAR */
+.score-bar{display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--gray-50);border-radius:var(--radius);margin-bottom:16px;border:1px solid var(--gray-200)}
+.score-bar .score-label{font-size:14px;color:var(--gray-600);font-weight:500}
+.score-bar .score-value{font-size:20px;font-weight:700;color:var(--primary)}
+.score-bar .score-total{font-size:14px;color:var(--gray-400)}
+.score-bar .bar-track{flex:1;height:8px;background:var(--gray-200);border-radius:4px;overflow:hidden}
+.score-bar .bar-fill{height:100%;background:linear-gradient(90deg,var(--primary),var(--secondary));border-radius:4px;transition:width .5s ease;width:0%}
+/* QUIZ RESULT MODAL */
+.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:200;display:none;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.show{display:flex}
+.modal{background:#fff;border-radius:var(--radius-lg);padding:32px;max-width:440px;width:100%;box-shadow:var(--shadow-lg);text-align:center}
+.modal h3{font-size:22px;margin-bottom:8px}
+.modal .modal-score{font-size:48px;font-weight:800;color:var(--primary);margin:12px 0}
+.modal .modal-msg{color:var(--gray-500);margin-bottom:20px;font-size:15px}
+.modal .modal-icon{font-size:56px;margin-bottom:8px}
+.modal .modal-actions{display:flex;gap:8px;justify-content:center}
+/* PRACTICE */
+.practice-card{border:1px solid var(--gray-200);border-radius:var(--radius);padding:16px;margin-bottom:12px;background:var(--gray-50)}
+.practice-card .p-task{font-size:14px;color:var(--gray-700);margin-bottom:8px}
+.practice-card .p-task strong{color:var(--gray-900)}
+.practice-card .p-input{width:100%;padding:10px 12px;border:2px solid var(--gray-200);border-radius:var(--radius);font-size:14px;font-family:inherit;resize:vertical;min-height:48px;transition:var(--transition)}
+.practice-card .p-input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-light)}
+.practice-card .p-answer{display:none;margin-top:8px;padding:10px 14px;background:var(--secondary-light);border-radius:var(--radius);font-size:14px;color:#065f46;border-left:3px solid var(--secondary)}
+.practice-card .p-answer.show{display:block}
+.practice-card .p-controls{display:flex;gap:6px;margin-top:8px}
+/* COMPARISON TABLE */
+.comparison-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:12px 0}
+.comparison-col{background:var(--gray-50);padding:14px;border-radius:var(--radius);border:1px solid var(--gray-200)}
+.comparison-col h4{font-size:13px;color:var(--gray-500);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px}
+.comparison-col p{font-size:15px;font-weight:600;color:var(--gray-800)}
+/* SUMMARY TABLE */
+.summary-table{width:100%;border-collapse:collapse;font-size:13px;margin:12px 0}
+.summary-table th{background:var(--gray-50);padding:10px 12px;text-align:left;font-weight:600;color:var(--gray-600);border-bottom:2px solid var(--gray-200);font-size:12px;text-transform:uppercase;letter-spacing:.4px}
+.summary-table td{padding:10px 12px;border-bottom:1px solid var(--gray-200);color:var(--gray-700);vertical-align:top}
+.summary-table tr:hover td{background:var(--gray-50)}
+.summary-table .tense-name{font-weight:600;color:var(--primary)}
+/* STUDY TIPS */
+.tip-card{display:flex;gap:12px;padding:14px;background:var(--gray-50);border-radius:var(--radius);border:1px solid var(--gray-200);margin-bottom:8px}
+.tip-card .tip-num{width:28px;height:28px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;flex-shrink:0}
+.tip-card .tip-text{font-size:14px;color:var(--gray-700)}
+.tip-card .tip-text strong{color:var(--gray-900)}
+/* MISTAKES LIST */
+.mistake-list{padding:0;list-style:none}
+.mistake-list li{padding:10px 0;border-bottom:1px solid var(--gray-100);font-size:14px;color:var(--gray-700);display:flex;gap:8px}
+.mistake-list li::before{content:"!";width:20px;height:20px;border-radius:50%;background:var(--red-light);color:var(--red);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;margin-top:2px}
+/* DASHBOARD */
+.dashboard-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin:16px 0}
+.dash-card{padding:14px;border-radius:var(--radius);border:1px solid var(--gray-200);text-align:center;cursor:pointer;transition:var(--transition);background:#fff}
+.dash-card:hover{border-color:var(--primary);box-shadow:var(--shadow-md)}
+.dash-card .dash-icon{font-size:22px;margin-bottom:4px}
+.dash-card .dash-name{font-size:12px;font-weight:600;color:var(--gray-600)}
+.dash-card .dash-status{font-size:11px;color:var(--gray-400);margin-top:2px}
+.dash-card .dash-status.complete{color:var(--secondary);font-weight:600}
+.dash-card .dash-status.in-progress{color:var(--amber);font-weight:600}
+/* RESPONSIVE */
+@media(max-width:768px){
+  .sidebar{transform:translateX(-100%);position:fixed;z-index:90;width:260px;transition:transform .3s ease}
+  .sidebar.open{transform:translateX(0)}
+  .hamburger{display:block}
+  .main-content{margin-left:0;padding:20px 16px}
+  .app-header{padding:0 16px}
+  .section-card{padding:20px 16px}
+  .comparison-grid{grid-template-columns:1fr}
+  .header-progress .progress-label{display:none}
+  .dashboard-grid{grid-template-columns:repeat(auto-fill,minmax(110px,1fr))}
+  .tab-btn{padding:8px 12px;font-size:13px}
+}
+@media(max-width:480px){
+  .section-card h2{font-size:20px}
+  .quiz-option{padding:8px 12px;font-size:13px}
+  .modal{padding:24px 16px}
+}
+/* UTILITY */
+.hidden{display:none!important}
+.mt-8{margin-top:8px}
+.mt-16{margin-top:16px}
+.mb-8{margin-bottom:8px}
+.mb-16{margin-bottom:16px}
+.fade-in{animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="app-header">
+  <div style="display:flex;align-items:center;gap:12px">
+    <button class="hamburger" id="hamburgerBtn" aria-label="Menu">&#9776;</button>
+    <div class="logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      English Tenses
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="header-progress">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      <span class="progress-num" id="progressNum">0</span><span class="progress-label">/ 13</span>
+    </div>
+  </div>
+</header>
+
+<!-- LAYOUT -->
+<div class="app-layout">
+
+  <!-- SIDEBAR -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-section">
+      <div class="section-label">Dashboard</div>
+      <button class="sidebar-item active" data-section="dashboard" onclick="navigateTo('dashboard')">
+        <span class="status-dot" style="background:var(--primary)"></span> Overview
+      </button>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="section-label">Present Tenses</div>
+      <button class="sidebar-item" data-section="tense" data-tense="simple-present" onclick="navigateTo('tense','simple-present')">
+        <span class="status-dot" id="dot-simple-present"></span> Simple Present
+      </button>
+      <button class="sidebar-item" data-section="tense" data-tense="present-continuous" onclick="navigateTo('tense','present-continuous')">
+        <span class="status-dot" id="dot-present-continuous"></span> Present Continuous
+      </button>
+      <button class="sidebar-item" data-section="tense" data-tense="present-perfect" onclick="navigateTo('tense','present-perfect')">
+        <span class="status-dot" id="dot-present-perfect"></span> Present Perfect
+      </button>
+      <button class="sidebar-item" data-section="tense" data-tense="present-perfect-continuous" onclick="navigateTo('tense','present-perfect-continuous')">
+        <span class="status-dot" id="dot-present-perfect-continuous"></span> Present Perfect Continuous
+      </button>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="section-label">Past Tenses</div>
+      <button class="sidebar-item" data-section="tense" data-tense="simple-past" onclick="navigateTo('tense','simple-past')">
+        <span class="status-dot" id="dot-simple-past"></span> Simple Past
+      </button>
+      <button class="sidebar-item" data-section="tense" data-tense="past-continuous" onclick="navigateTo('tense','past-continuous')">
+        <span class="status-dot" id="dot-past-continuous"></span> Past Continuous
+      </button>
+      <button class="sidebar-item" data-section="tense" data-tense="past-perfect" onclick="navigateTo('tense','past-perfect')">
+        <span class="status-dot" id="dot-past-perfect"></span> Past Perfect
+      </button>
+      <button class="sidebar-item" data-section="tense" data-tense="past-perfect-continuous" onclick="navigateTo('tense','past-perfect-continuous')">
+        <span class="status-dot" id="dot-past-perfect-continuous"></span> Past Perfect Continuous
+      </button>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="section-label">Future Tenses</div>
+      <button class="sidebar-item" data-section="tense" data-tense="simple-future" onclick="navigateTo('tense','simple-future')">
+        <span class="status-dot" id="dot-simple-future"></span> Simple Future
+      </button>
+      <button class="sidebar-item" data-section="tense" data-tense="present-continuous-future" onclick="navigateTo('tense','present-continuous-future')">
+        <span class="status-dot" id="dot-present-continuous-future"></span> Present Continuous (Future)
+      </button>
+      <button class="sidebar-item" data-section="tense" data-tense="future-continuous" onclick="navigateTo('tense','future-continuous')">
+        <span class="status-dot" id="dot-future-continuous"></span> Future Continuous
+      </button>
+      <button class="sidebar-item" data-section="tense" data-tense="future-perfect" onclick="navigateTo('tense','future-perfect')">
+        <span class="status-dot" id="dot-future-perfect"></span> Future Perfect
+      </button>
+      <button class="sidebar-item" data-section="tense" data-tense="future-perfect-continuous" onclick="navigateTo('tense','future-perfect-continuous')">
+        <span class="status-dot" id="dot-future-perfect-continuous"></span> Future Perfect Continuous
+      </button>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <button class="sidebar-item" data-section="practice" onclick="navigateTo('practice')">
+        <span class="status-dot" style="background:var(--amber)"></span> Practice
+      </button>
+      <button class="sidebar-item" data-section="mixed-quiz" onclick="navigateTo('mixed-quiz')">
+        <span class="status-dot" id="dot-mixed-quiz"></span> Mixed Quiz
+      </button>
+      <button class="sidebar-item" data-section="summary" onclick="navigateTo('summary')">
+        <span class="status-dot" style="background:var(--gray-400)"></span> Summary & Tips
+      </button>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content" id="mainContent">
+    <!-- Dynamic content rendered here -->
+  </main>
+</div>
+
+<!-- MODAL OVERLAY -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modalContent">
+    <div class="modal-icon" id="modalIcon">&#127942;</div>
+    <h3 id="modalTitle">Great Job!</h3>
+    <div class="modal-score" id="modalScore">0/3</div>
+    <p class="modal-msg" id="modalMsg">You completed the quiz.</p>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeModal()">Close</button>
+      <button class="btn btn-primary" id="modalRetryBtn" onclick="closeModal();retryQuiz()">Retry</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+const TENSES = [
+  {
+    id:'simple-present', name:'Simple Present', timeFrame:'present',
+    definition:'The Simple Present describes habits, facts, and regular actions.',
+    structure:'Subject + base verb (he/she/it + verb + s/es)<br>Negative: Subject + do/does + not + base verb<br>Question: Do/Does + subject + base verb?',
+    usage:[
+      'Habits and routines (things we do regularly)',
+      'General truths and scientific facts',
+      'Fixed schedules and timetables (buses, classes, TV shows)'
+    ],
+    signalWords:'always, usually, often, sometimes, rarely, never, every day/week, on Mondays',
+    examples:[
+      'I drink coffee every morning.',
+      'The sun rises in the east.',
+      'She teaches English at a school.'
+    ],
+    commonMistake:{wrong:'He work in a hospital.',correct:'He works in a hospital.',note:'Students forget the -s for he/she/it.'},
+    comparison:{with:'Present Continuous',diff:'Simple Present = a habit or fact (I work in a bank.)<br>Present Continuous = happening now (I am working on a report right now.)'}
+  },
+  {
+    id:'present-continuous', name:'Present Continuous', timeFrame:'present',
+    definition:'The Present Continuous describes actions happening now or around now, and fixed future arrangements.',
+    structure:'Subject + am/is/are + verb + ing<br>Negative: Subject + am/is/are + not + verb + ing<br>Question: Am/Is/Are + subject + verb + ing?',
+    usage:[
+      'Actions happening at the moment of speaking',
+      'Temporary actions around this time (but not necessarily right now)',
+      'Fixed future plans and arrangements (with a future time word)'
+    ],
+    signalWords:'now, right now, at the moment, currently, today, this week, tonight, tomorrow',
+    examples:[
+      'She is reading a book right now.',
+      'They are building a new hospital in our city this year.',
+      'I am meeting my friend for lunch tomorrow.'
+    ],
+    commonMistake:{wrong:'I watch TV now.',correct:'I am watching TV now.',note:'Students use Simple Present when they mean "right now."'},
+    comparison:{with:'Simple Present',diff:'Simple Present = general habit (I walk to school every day.)<br>Present Continuous = right now (I am walking to school now.)'}
+  },
+  {
+    id:'present-perfect', name:'Present Perfect', timeFrame:'present',
+    definition:'The Present Perfect connects the past to the present. The action happened before now, but the result is still present.',
+    structure:'Subject + have/has + past participle (V3)<br>Negative: Subject + have/has + not + past participle<br>Question: Have/Has + subject + past participle?',
+    usage:[
+      'Life experiences (no specific time mentioned)',
+      'Past actions with a present result',
+      'Actions that started in the past and continue to now (with for and since)'
+    ],
+    signalWords:'ever, never, already, just, yet, so far, for, since, recently',
+    examples:[
+      'I have visited Egypt twice.',
+      'She has already finished her homework.',
+      'They have lived in this town since 2010.'
+    ],
+    commonMistake:{wrong:'I have visited Paris last year.',correct:'I visited Paris last year. OR I have visited Paris (before).',note:'Students use a specific past time with Present Perfect.'},
+    comparison:{with:'Simple Past',diff:'Present Perfect = experience or result now (I have lost my keys — I still cannot find them.)<br>Simple Past = finished (I lost my keys yesterday.)'}
+  },
+  {
+    id:'present-perfect-continuous', name:'Present Perfect Continuous', timeFrame:'present',
+    definition:'Focuses on the duration of an action that started in the past and continues to the present, or has just stopped.',
+    structure:'Subject + have/has + been + verb + ing<br>Negative: Subject + have/has + not + been + verb + ing<br>Question: Have/Has + subject + been + verb + ing?',
+    usage:[
+      'Actions that started in the past and are still continuing (emphasis on how long)',
+      'Actions that recently stopped with a visible result in the present',
+      'Expressing annoyance or repeating actions up to now'
+    ],
+    signalWords:'for, since, all day/morning/week, recently, lately, how long',
+    examples:[
+      'I have been studying English for two hours.',
+      'She is out of breath because she has been running.',
+      'They have been waiting since 8 o\'clock.'
+    ],
+    commonMistake:{wrong:'I have been knowing him for five years.',correct:'I have known him for five years.',note:'Students use Present Perfect Continuous with stative verbs (know, believe, want).'},
+    comparison:{with:'Present Perfect',diff:'Present Perfect = result or number (I have written three emails.)<br>Present Perfect Continuous = duration (I have been writing emails all morning.)'}
+  },
+  {
+    id:'simple-past', name:'Simple Past', timeFrame:'past',
+    definition:'The Simple Past describes completed actions or states in the past.',
+    structure:'Subject + V2 (past form of verb)<br>Negative: Subject + did + not + base verb<br>Question: Did + subject + base verb?',
+    usage:[
+      'Completed actions at a specific past time',
+      'Past habits that no longer happen',
+      'Stories and sequences of events in the past'
+    ],
+    signalWords:'yesterday, last night/week/year, ago, in 2010, then, when',
+    examples:[
+      'I visited my grandfather yesterday.',
+      'She bought a new phone last week.',
+      'They played football until sunset.'
+    ],
+    commonMistake:{wrong:'She buyed a dress.',correct:'She bought a dress.',note:'Students use wrong irregular past forms.'},
+    comparison:{with:'Present Perfect',diff:'Simple Past = finished action, time is important (I saw that movie last night.)<br>Present Perfect = connection to now (I have seen that movie before.)'}
+  },
+  {
+    id:'past-continuous', name:'Past Continuous', timeFrame:'past',
+    definition:'Describes actions that were in progress at a specific time in the past, or two actions happening at the same time.',
+    structure:'Subject + was/were + verb + ing<br>Negative: Subject + was/were + not + verb + ing<br>Question: Was/Were + subject + verb + ing?',
+    usage:[
+      'An action in progress at a particular past moment',
+      'Two simultaneous past actions (with while)',
+      'An action interrupted by another action (the shorter action in Simple Past)'
+    ],
+    signalWords:'at 5 o\'clock yesterday, while, when, as, all evening',
+    examples:[
+      'I was watching TV at 9 o\'clock last night.',
+      'She was cooking while he was cleaning the house.',
+      'They were walking home when it started to rain.'
+    ],
+    commonMistake:{wrong:'Yesterday I was buying a car. (if finished)',correct:'Yesterday I bought a car.',note:'Students use Past Continuous for complete, finished actions.'},
+    comparison:{with:'Simple Past',diff:'Past Continuous = ongoing action (I was reading when she called.)<br>Simple Past = completed action (I read the book in one hour.)'}
+  },
+  {
+    id:'past-perfect', name:'Past Perfect', timeFrame:'past',
+    definition:'Shows that one past action happened before another past action — "the past before the past."',
+    structure:'Subject + had + past participle (V3)<br>Negative: Subject + had + not + past participle<br>Question: Had + subject + past participle?',
+    usage:[
+      'To show which of two past events happened first',
+      'To give background for a past situation',
+      'In reported speech after a past tense reporting verb'
+    ],
+    signalWords:'already, just, never, before, after, by the time, when, until then',
+    examples:[
+      'When I arrived, the bus had already left.',
+      'She had finished her work before she went home.',
+      'They had never seen the ocean before they visited Alexandria.'
+    ],
+    commonMistake:{wrong:'After I had finished work, I had gone home. (unnecessary)',correct:'After I finished work, I went home.',note:'Students overuse Past Perfect when order is already clear.'},
+    comparison:{with:'Simple Past',diff:'Past Perfect = earlier past (I had eaten when he arrived.)<br>Simple Past = later or same time (I ate when he arrived.)'}
+  },
+  {
+    id:'past-perfect-continuous', name:'Past Perfect Continuous', timeFrame:'past',
+    definition:'Emphasizes the duration of a past action that was in progress before another past action or time.',
+    structure:'Subject + had + been + verb + ing<br>Negative: Subject + had + not + been + verb + ing<br>Question: Had + subject + been + verb + ing?',
+    usage:[
+      'To emphasize how long something had been happening before something else',
+      'To explain the cause of a past result',
+      'Background actions leading up to another past moment'
+    ],
+    signalWords:'for, since, before, until, all day/week, how long',
+    examples:[
+      'They had been walking for two hours before they found a rest house.',
+      'She was exhausted because she had been working all night.',
+      'The garden was wet. It had been raining all morning.'
+    ],
+    commonMistake:{wrong:'He had been wanting a car for years.',correct:'He had wanted a car for years.',note:'Students use Past Perfect Continuous with stative verbs.'},
+    comparison:{with:'Past Perfect',diff:'Past Perfect = completed earlier (I had written the report before the meeting.)<br>Past Perfect Continuous = duration before a point (I had been writing for three hours before the meeting.)'}
+  },
+  {
+    id:'simple-future', name:'Simple Future (will)', timeFrame:'future',
+    definition:'Expresses predictions, spontaneous decisions, promises, and offers.',
+    structure:'Subject + will + base verb<br>Negative: Subject + will + not (won\'t) + base verb<br>Question: Will + subject + base verb?',
+    usage:[
+      'Predictions about the future (I think, I believe, maybe)',
+      'Decisions made at the moment of speaking',
+      'Promises, offers, threats, and requests'
+    ],
+    signalWords:'tomorrow, next week/month/year, soon, later, in the future, I think, probably',
+    examples:[
+      'I think it will rain tomorrow.',
+      'I will help you carry those bags.',
+      'She will call you when she arrives.'
+    ],
+    commonMistake:{wrong:'She will comes tomorrow.',correct:'She will come tomorrow.',note:'Students forget that after will the verb stays in base form.'},
+    comparison:{with:'Present Continuous for Future',diff:'Will = prediction or spontaneous (The phone is ringing. I will answer it.)<br>Present Continuous = fixed plan (I am meeting my friend tomorrow.)'}
+  },
+  {
+    id:'present-continuous-future', name:'Present Continuous for Future', timeFrame:'future',
+    definition:'We use Present Continuous with a future time word to talk about fixed plans and arrangements.',
+    structure:'Subject + am/is/are + verb + ing + future time expression',
+    usage:[
+      'Personal arrangements and appointments',
+      'Plans that are already confirmed with other people'
+    ],
+    signalWords:'tonight, tomorrow, next week, this weekend, on Monday, at 3 o\'clock',
+    examples:[
+      'I am meeting my friend for dinner tonight.',
+      'She is flying to Dubai next Tuesday.',
+      'They are having a party on Saturday.'
+    ],
+    commonMistake:{wrong:'I am leaving. (unclear — present or future?)',correct:'I am leaving tomorrow.',note:'Students forget to include a future time word.'},
+    comparison:{with:'Simple Future (will)',diff:'Present Continuous = fixed arrangement (I am seeing the doctor at 10.)<br>Will = decision now (I don\'t feel well. I will see a doctor.)'}
+  },
+  {
+    id:'future-continuous', name:'Future Continuous', timeFrame:'future',
+    definition:'Describes actions that will be in progress at a specific time in the future.',
+    structure:'Subject + will + be + verb + ing<br>Negative: Subject + will + not + be + verb + ing<br>Question: Will + subject + be + verb + ing?',
+    usage:[
+      'An action that will be in progress at a certain future moment',
+      'Actions that will happen as part of a normal routine',
+      'Polite questions about someone\'s plans'
+    ],
+    signalWords:'this time tomorrow/next week, at 8 o\'clock tomorrow, by then, when',
+    examples:[
+      'This time next week, I will be lying on a beach.',
+      'She will be working when you arrive.',
+      'Will you be using the car this evening?'
+    ],
+    commonMistake:{wrong:'I will working tomorrow at 10 AM.',correct:'I will be working tomorrow at 10 AM.',note:'Students forget to use "be" in the structure.'},
+    comparison:{with:'Future Perfect',diff:'Future Continuous = ongoing at a future time (At 6 PM, I will be eating dinner.)<br>Future Perfect = completed before a future time (I will have eaten by 7 PM.)'}
+  },
+  {
+    id:'future-perfect', name:'Future Perfect', timeFrame:'future',
+    definition:'Expresses an action that will be completed before a specific time or event in the future.',
+    structure:'Subject + will + have + past participle (V3)<br>Negative: Subject + will + not + have + past participle<br>Question: Will + subject + have + past participle?',
+    usage:[
+      'Actions that will finish before a future deadline',
+      'To express certainty that something will be done by a certain future point'
+    ],
+    signalWords:'by, by the time, by then, before, by next week/month/year',
+    examples:[
+      'By next month, I will have finished this course.',
+      'She will have arrived by 6 o\'clock.',
+      'They will have built the bridge by 2028.'
+    ],
+    commonMistake:{wrong:'I will have finish by tomorrow.',correct:'I will have finished by tomorrow.',note:'Students confuse the structure with Present Perfect.'},
+    comparison:{with:'Future Continuous',diff:'Future Perfect = completed before a future time (I will have left by 5 PM.)<br>Future Continuous = in progress at a future time (I will be traveling at 5 PM.)'}
+  },
+  {
+    id:'future-perfect-continuous', name:'Future Perfect Continuous', timeFrame:'future',
+    definition:'Emphasizes the duration of an action up to a specific future time.',
+    structure:'Subject + will + have + been + verb + ing<br>Negative: Subject + will + not + have + been + verb + ing<br>Question: Will + subject + have + been + verb + ing?',
+    usage:[
+      'To show how long something will have been happening before a future time',
+      'To emphasize the continuous nature of an action up to a point in the future'
+    ],
+    signalWords:'by, by the time, for, since, by next year/month, how long',
+    examples:[
+      'By December, I will have been working here for five years.',
+      'She will have been studying for three hours by the time you arrive.',
+      'By 2030, they will have been living in Cairo for 20 years.'
+    ],
+    commonMistake:{wrong:'By next year, I will work here for six months. (wrong meaning)',correct:'By next year, I will have been working here for six months.',note:'Students avoid this tense, but it follows the same pattern as all perfect continuous tenses.'},
+    comparison:{with:'Future Perfect',diff:'Future Perfect = finished action<br>Future Perfect Continuous = ongoing duration'}
+  }
+];
+
+const QUIZZES = {};
+// Generate quiz data for each tense
+TENSES.forEach(t=>{QUIZZES[t.id]=[]});
+
+// Per-tense quiz questions
+QUIZZES['simple-present']=[
+  {q:'My brother _______ to work by bus every day.',o:['go','goes','going','gone'],a:1},
+  {q:'Cats _______ milk.',o:['like','likes','liking','liked'],a:0},
+  {q:'The train _______ at 6 o\'clock every morning.',o:['leave','leaves','leaving','left'],a:1}
+];
+QUIZZES['present-continuous']=[
+  {q:'Please be quiet. The baby _______.',o:['sleeps','sleep','is sleeping','slept'],a:2},
+  {q:'They _______ a new mall in our neighborhood this year.',o:['build','builds','are building','built'],a:2},
+  {q:'Look! It _______ outside.',o:['rain','rains','is raining','rained'],a:2}
+];
+QUIZZES['present-perfect']=[
+  {q:'I _______ never _______ to Jeddah.',o:['have / been','has / been','am / going','was / going'],a:0},
+  {q:'She _______ already _______ dinner.',o:['has / cook','has / cooked','have / cooked','is / cooking'],a:1},
+  {q:'They _______ in this house since 2018.',o:['live','are living','have lived','lived'],a:2}
+];
+QUIZZES['present-perfect-continuous']=[
+  {q:'He _______ for this company since 2016.',o:['works','is working','has been working','worked'],a:2},
+  {q:'She looks tired because she _______ all night.',o:['studies','is studying','has been studying','studied'],a:2},
+  {q:'How long _______ you _______ for the bus?',o:['do / wait','are / waiting','have / been waiting','did / wait'],a:2}
+];
+QUIZZES['simple-past']=[
+  {q:'We _______ to the beach last Friday.',o:['go','goes','went','gone'],a:2},
+  {q:'She _______ a beautiful dress at the mall yesterday.',o:['buy','buys','bought','buying'],a:2},
+  {q:'I _______ my keys this morning.',o:['lose','loses','lost','losing'],a:2}
+];
+QUIZZES['past-continuous']=[
+  {q:'I _______ dinner when you called me.',o:['cook','cooked','was cooking','have cooked'],a:2},
+  {q:'They _______ football at 5 o\'clock yesterday.',o:['play','played','were playing','have played'],a:2},
+  {q:'While she _______ TV, he was reading a book.',o:['watches','watched','was watching','has watched'],a:2}
+];
+QUIZZES['past-perfect']=[
+  {q:'When we reached the station, the train _______ already _______.',o:['has / left','had / left','was / leaving','did / leave'],a:1},
+  {q:'She _______ never _______ such a beautiful place before her trip.',o:['have / seen','has / seen','had / seen','was / seeing'],a:2},
+  {q:'After he _______ his homework, he went to bed.',o:['finishes','finished','had finished','has finished'],a:2}
+];
+QUIZZES['past-perfect-continuous']=[
+  {q:'They _______ for over an hour when the bus finally came.',o:['wait','waited','were waiting','had been waiting'],a:3},
+  {q:'She failed the exam because she _______ enough.',o:["doesn't study","didn't study","wasn't studying","hadn't been studying"],a:3},
+  {q:'His clothes were dirty because he _______ in the garden all morning.',o:['works','worked','was working','had been working'],a:3}
+];
+QUIZZES['simple-future']=[
+  {q:'I think it _______ sunny tomorrow.',o:['is','was','will be','is being'],a:2},
+  {q:"Don't worry. I _______ you with your project.",o:['help','helped','will help','am helping'],a:2},
+  {q:'She _______ you when she has time.',o:['calls','called','will call','is calling'],a:2}
+];
+QUIZZES['present-continuous-future']=[
+  {q:'I _______ the doctor tomorrow at 10 AM.',o:['see','saw','am seeing','will see'],a:2},
+  {q:'They _______ a wedding party next Saturday.',o:['have','had','are having','will have'],a:2},
+  {q:'She _______ to Istanbul next week for a conference.',o:['travels','travelled','is travelling','will travel'],a:2}
+];
+QUIZZES['future-continuous']=[
+  {q:'This time next week, I _______ on the beach in Hurghada.',o:['sit','will sit','will be sitting','am sitting'],a:2},
+  {q:'At 8 PM tonight, they _______ dinner at a restaurant.',o:['have','will have','will be having','are having'],a:2},
+  {q:'_______ you _______ the car this evening?',o:['Do / use','Will / use','Will / be using','Are / using'],a:2}
+];
+QUIZZES['future-perfect']=[
+  {q:'By the end of this year, she _______ all her exams.',o:['finishes','will finish','will have finished','is finishing'],a:2},
+  {q:'They _______ the project by next Monday.',o:['complete','will complete','will have completed','are completing'],a:2},
+  {q:'By the time you arrive, I _______ dinner.',o:['cook','will cook','will have cooked','am cooking'],a:2}
+];
+QUIZZES['future-perfect-continuous']=[
+  {q:'By next June, I _______ in this company for five years.',o:['work','will work','will be working','will have been working'],a:3},
+  {q:'She _______ for six hours by the time the meeting ends.',o:['talks','will talk','will be talking','will have been talking'],a:3},
+  {q:'By 2035, they _______ in this city for 25 years.',o:['live','will live','will be living','will have been living'],a:3}
+];
+
+// Mixed quiz (15 questions)
+const MIXED_QUIZ = [
+  {q:'Ali _______ Arabic and English fluently.',o:['speak','speaks','speaking','spoken'],a:1,tense:'Simple Present'},
+  {q:'The children _______ in the garden right now.',o:['play','plays','are playing','played'],a:2,tense:'Present Continuous'},
+  {q:'I _______ never _______ this food before. It is delicious!',o:['have / tried','has / tried','am / trying','was / trying'],a:0,tense:'Present Perfect'},
+  {q:'He is sweating because he _______ football for two hours.',o:['plays','played','is playing','has been playing'],a:3,tense:'Present Perfect Continuous'},
+  {q:'We _______ a great movie at the cinema last night.',o:['watch','watches','watched','are watching'],a:2,tense:'Simple Past'},
+  {q:'I _______ a book when the lights went out.',o:['read','reads','was reading','have read'],a:2,tense:'Past Continuous'},
+  {q:'She realized she _______ her keys at home after she left.',o:['forgets','forgot','had forgotten','has forgotten'],a:2,tense:'Past Perfect'},
+  {q:'The ground was wet because it _______ all night.',o:['rained','was raining','had been raining','has rained'],a:2,tense:'Past Perfect Continuous'},
+  {q:'I am hungry. I _______ make a sandwich.',o:['will','am','was','have'],a:0,tense:'Simple Future'},
+  {q:'She _______ her grandparents this weekend.',o:['visits','visited','is visiting','will visit'],a:2,tense:'Present Continuous for Future'},
+  {q:'At this time tomorrow, we _______ to London.',o:['fly','will fly','will be flying','are flying'],a:2,tense:'Future Continuous'},
+  {q:'By the time he is 30, he _______ around the world.',o:['travels','will travel','will have traveled','is traveling'],a:2,tense:'Future Perfect'},
+  {q:'By next month, I _______ here for exactly one year.',o:['work','will work','will be working','will have been working'],a:3,tense:'Future Perfect Continuous'},
+  {q:'The museum _______ at 9 AM every day.',o:['open','opens','is opening','opened'],a:1,tense:'Simple Present (schedule)'},
+  {q:'I _______ just _______ the news. It is very sad.',o:['have / heard','has / heard','am / hearing','was / hearing'],a:0,tense:'Present Perfect'}
+];
+
+// Practice exercises
+const PRACTICE_EXERCISES = [
+  {type:'rewrite',instruction:'Change from Simple Present to Present Continuous:',sentence:'She reads a book every night.',hint:'She is reading a book right now.',answer:'She is reading a book right now.'},
+  {type:'rewrite',instruction:'Change from Present Continuous to Simple Past:',sentence:'They are playing football in the park.',hint:'They played football in the park yesterday.',answer:'They played football in the park yesterday.'},
+  {type:'rewrite',instruction:'Change from Simple Past to Present Perfect:',sentence:'I visited my grandmother last week.',hint:'I have visited my grandmother (experience, no time).',answer:'I have visited my grandmother.'},
+  {type:'rewrite',instruction:'Change from Present Perfect to Present Perfect Continuous:',sentence:'He has lived in Dubai for three years.',hint:'He has been living in Dubai for three years (emphasis on duration).',answer:'He has been living in Dubai for three years.'},
+  {type:'rewrite',instruction:'Change from Simple Present to Simple Future:',sentence:'We eat lunch at 1 PM.',hint:'We will eat lunch at 1 PM tomorrow.',answer:'We will eat lunch at 1 PM tomorrow.'},
+  {type:'rewrite',instruction:'Change from Simple Future to Present Continuous for Future:',sentence:'She will fly to Cairo next Monday.',hint:'She is flying to Cairo next Monday (fixed plan).',answer:'She is flying to Cairo next Monday.'},
+  {type:'rewrite',instruction:'Change from Simple Past to Past Continuous:',sentence:'I watched TV when she arrived.',hint:'I was watching TV when she arrived.',answer:'I was watching TV when she arrived.'},
+  {type:'rewrite',instruction:'Change from Past Continuous to Past Perfect Continuous:',sentence:'They were traveling for five hours when the accident happened.',hint:'They had been traveling for five hours when the accident happened.',answer:'They had been traveling for five hours when the accident happened.'},
+  {type:'rewrite',instruction:'Change from Simple Future to Future Continuous:',sentence:'I will work at 10 AM tomorrow.',hint:'I will be working at 10 AM tomorrow.',answer:'I will be working at 10 AM tomorrow.'},
+  {type:'rewrite',instruction:'Change from Future Continuous to Future Perfect:',sentence:'She will be studying when you arrive.',hint:'She will have studied by the time you arrive.',answer:'She will have studied by the time you arrive.'}
+];
+
+// Common mistakes for Arabic learners
+const COMMON_MISTAKES = [
+  {title:'Missing the Verb "to be" in Continuous Tenses',desc:'Arabic does not always use "to be" in present sentences. This habit carries into English.',wrong:'She reading a book.',correct:'She is reading a book.'},
+  {title:'Confusing Present Perfect and Simple Past',desc:'In Arabic, the past tense often covers both meanings.',wrong:'I visited Paris already. (if time is not stated)',correct:'I have visited Paris already.'},
+  {title:'Forgetting the -s Ending in Simple Present (He/She/It)',desc:'Arabic verb endings are different from English.',wrong:'He work in a bank.',correct:'He works in a bank.'},
+  {title:'Using "will" for Every Future Situation',desc:'Arabic uses one future form (sa- or sawfa). English has many future forms.',wrong:'I will meet my friend tomorrow at 6 PM. (sounds like a decision now)',correct:'I am meeting my friend tomorrow at 6 PM. (fixed plan)'},
+  {title:'Word Order in Questions',desc:'Arabic question formation is different from English.',wrong:'You have seen this movie?',correct:'Have you seen this movie?'}
+];
+
+const STUDY_TIPS = [
+  'Learn the Pattern: Every continuous tense has <strong>be + verb-ing</strong>. Every perfect tense has <strong>have + past participle</strong>. Every perfect continuous has <strong>have + been + verb-ing</strong>. Learn the pattern and you can build any tense.',
+  'Practice with Time Markers: When you learn a new tense, learn its time markers too. For example: Simple Past = ago, yesterday, last week. The time marker will remind you which tense to use.',
+  'Write a Daily Journal in English: Write 3-4 sentences about your day. Use Simple Past for finished actions and Present Perfect for experiences. This builds natural habit.',
+  'Use Color Coding: Choose a color for each aspect: Simple = blue, Continuous = green, Perfect = red, Perfect Continuous = purple. Highlight verb forms to remember patterns.',
+  'Speak in Tenses, Not in Translation: Do not translate from Arabic to English. Think directly in English. Ask yourself: Is this a habit? Is it happening now? Is it finished? Let the answer guide your tense choice.'
+];
+
+// ============================================================
+// STATE
+// ============================================================
+let state = {
+  currentSection: 'dashboard',
+  currentTenseId: null,
+  quizStates: {},      // {tenseId: {current:0, score:0, answered:false, completed:false}}
+  mixedQuizState: {current:0, score:0, answered:false, completed:false},
+  practiceRevealed: Array(PRACTICE_EXERCISES.length).fill(false),
+  completedTenses: new Set()
+};
+
+// Initialize quiz states
+TENSES.forEach(t=>{
+  state.quizStates[t.id]={current:0,score:0,answered:false,completed:false,selected:null};
+});
+
+// ============================================================
+// RENDER ENGINE
+// ============================================================
+function navigateTo(section, tenseId) {
+  state.currentSection = section;
+  state.currentTenseId = tenseId || null;
+  render();
+  // Update sidebar active state
+  document.querySelectorAll('.sidebar-item').forEach(el=>el.classList.remove('active'));
+  let selector;
+  if(section==='dashboard') selector='[data-section="dashboard"]';
+  else if(section==='tense') selector=`[data-section="tense"][data-tense="${tenseId}"]`;
+  else if(section==='practice') selector='[data-section="practice"]';
+  else if(section==='mixed-quiz') selector='[data-section="mixed-quiz"]';
+  else if(section==='summary') selector='[data-section="summary"]';
+  const el = document.querySelector(selector);
+  if(el) el.classList.add('active');
+  // Close mobile sidebar
+  document.getElementById('sidebar').classList.remove('open');
+  window.scrollTo(0,0);
+}
+
+function render() {
+  const main = document.getElementById('mainContent');
+  const section = state.currentSection;
+  updateProgress();
+  switch(section) {
+    case 'dashboard': renderDashboard(main); break;
+    case 'tense': renderTense(main, state.currentTenseId); break;
+    case 'practice': renderPractice(main); break;
+    case 'mixed-quiz': renderMixedQuiz(main); break;
+    case 'summary': renderSummary(main); break;
+    default: renderDashboard(main);
+  }
+}
+
+function updateProgress() {
+  document.getElementById('progressNum').textContent = state.completedTenses.size;
+}
+
+function updateDots() {
+  TENSES.forEach(t=>{
+    const dot = document.getElementById(`dot-${t.id}`);
+    if(dot){
+      const qs = state.quizStates[t.id];
+      if(state.completedTenses.has(t.id)) dot.className='status-dot completed';
+      else if(qs && qs.current>0) dot.className='status-dot in-progress';
+      else dot.className='status-dot';
+    }
+  });
+}
+
+// ============================================================
+// SECTION: DASHBOARD
+// ============================================================
+function renderDashboard(container) {
+  const completed = state.completedTenses.size;
+  const total = TENSES.length;
+  const pct = Math.round((completed/total)*100);
+  let html = `
+    <div class="section-card fade-in">
+      <h2>Welcome to English Tenses</h2>
+      <p class="subtitle">A complete interactive guide for Arabic-speaking learners</p>
+      <div class="score-bar" style="margin-bottom:20px">
+        <span class="score-label">Overall Progress</span>
+        <span class="score-value">${completed}</span><span class="score-total">/ ${total}</span>
+        <div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div>
+      </div>
+      <p style="color:var(--gray-600);font-size:14px;margin-bottom:16px">
+        Click on any tense to study it. Complete the quiz after each lesson to track your progress.
+      </p>
+    </div>
+    <div class="section-card fade-in">
+      <h2 style="font-size:18px">Choose a Tense to Study</h2>
+      <div class="dashboard-grid">
+  `;
+  const timeFrames = [
+    {label:'Present',icon:'&#9200;',tenses:TENSES.filter(t=>t.timeFrame==='present')},
+    {label:'Past',icon:'&#9199;',tenses:TENSES.filter(t=>t.timeFrame==='past')},
+    {label:'Future',icon:'&#128640;',tenses:TENSES.filter(t=>t.timeFrame==='future')}
+  ];
+  timeFrames.forEach(tf=>{
+    html+=`<div style="grid-column:1/-1;font-size:13px;font-weight:600;color:var(--gray-400);margin-top:4px;text-transform:uppercase;letter-spacing:.5px">${tf.icon} ${tf.label}</div>`;
+    tf.tenses.forEach(t=>{
+      const done = state.completedTenses.has(t.id);
+      html+=`<div class="dash-card" onclick="navigateTo('tense','${t.id}')">
+        <div class="dash-icon">${t.timeFrame==='present'?'&#9200;':t.timeFrame==='past'?'&#9199;':'&#128640;'}</div>
+        <div class="dash-name">${t.name}</div>
+        <div class="dash-status ${done?'complete':'in-progress'}">${done?'&#10003; Completed':'Study'}</div>
+      </div>`;
+    });
+  });
+  html+=`</div></div>`;
+  container.innerHTML = html;
+  updateDots();
+}
+
+// ============================================================
+// SECTION: TENSE LESSON + QUIZ
+// ============================================================
+let tenseTab = 'lesson'; // 'lesson' or 'quiz'
+
+function renderTense(container, tenseId) {
+  const tense = TENSES.find(t=>t.id===tenseId);
+  if(!tense){renderDashboard(container);return;}
+  const qs = state.quizStates[tenseId];
+  const completed = state.completedTenses.has(tenseId);
+  const timeEmoji = tense.timeFrame==='present'?'&#9200;':tense.timeFrame==='past'?'&#9199;':'&#128640;';
+  let html = `
+    <div class="breadcrumb">
+      <span onclick="navigateTo('dashboard')">Home</span>
+      <span class="sep">/</span>
+      <span>${tense.name}</span>
+    </div>
+    <div class="section-card fade-in">
+      <h2>${timeEmoji} ${tense.name} <span class="badge">${tense.timeFrame}</span></h2>
+      <div class="tab-bar">
+        <button class="tab-btn ${tenseTab==='lesson'?'active':''}" onclick="tenseTab='lesson';renderTense(document.getElementById('mainContent'),'${tenseId}')">Lesson</button>
+        <button class="tab-btn ${tenseTab==='quiz'?'active':''}" onclick="tenseTab='quiz';renderTense(document.getElementById('mainContent'),'${tenseId}')">Quiz ${completed?'&#10003;':''}</button>
+      </div>
+  `;
+  if(tenseTab==='lesson'){
+    html+=renderTenseLesson(tense);
+  } else {
+    html+=renderTenseQuiz(tense);
+  }
+  html+=`</div>`;
+  // Next tense button
+  const idx = TENSES.findIndex(t=>t.id===tenseId);
+  if(idx<TENSES.length-1){
+    html+=`<div style="text-align:right;margin-top:-12px;margin-bottom:24px">
+      <button class="btn btn-primary" onclick="navigateTo('tense','${TENSES[idx+1].id}')">Next: ${TENSES[idx+1].name} &rarr;</button>
+    </div>`;
+  } else {
+    html+=`<div style="text-align:right;margin-top:-12px;margin-bottom:24px">
+      <button class="btn btn-primary" onclick="navigateTo('mixed-quiz')">Take Mixed Quiz &rarr;</button>
+    </div>`;
+  }
+  container.innerHTML = html;
+  updateDots();
+}
+
+function renderTenseLesson(tense) {
+  return `
+    <p style="font-size:15px;color:var(--gray-600);margin-bottom:16px">${tense.definition}</p>
+    <div class="accordion">
+      <div class="accordion-item open">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          Structure / Formula <span class="icon">&#9660;</span>
+        </button>
+        <div class="accordion-body">
+          <p>${tense.structure}</p>
+        </div>
+      </div>
+      <div class="accordion-item open">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          When We Use It <span class="icon">&#9660;</span>
+        </button>
+        <div class="accordion-body">
+          <ul>${tense.usage.map(u=>`<li>${u}</li>`).join('')}</ul>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          Signal Words / Time Markers <span class="icon">&#9660;</span>
+        </button>
+        <div class="accordion-body">
+          <div class="signal-tags">${tense.signalWords.split(',').map(w=>`<span>${w.trim()}</span>`).join('')}</div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          Examples <span class="icon">&#9660;</span>
+        </button>
+        <div class="accordion-body">
+          ${tense.examples.map(ex=>`<div class="example-box"><p>${ex}</p></div>`).join('')}
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          Common Mistake <span class="icon">&#9660;</span>
+        </button>
+        <div class="accordion-body">
+          <div class="mistake-box">
+            <div class="label">&#9888; Common Error</div>
+            <p>${tense.commonMistake.note}</p>
+            <p><span class="wrong">${tense.commonMistake.wrong}</span> &rarr; <span class="correct">${tense.commonMistake.correct}</span></p>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          Compare: ${tense.name} vs ${tense.comparison.with} <span class="icon">&#9660;</span>
+        </button>
+        <div class="accordion-body">
+          <div class="compare-box">
+            <div class="label">&#128161; Key Difference</div>
+            <p>${tense.comparison.diff}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:right;margin-top:16px">
+      <button class="btn btn-primary" onclick="tenseTab='quiz';renderTense(document.getElementById('mainContent'),'${tense.id}')">Take Quiz &rarr;</button>
+    </div>
+  `;
+}
+
+function renderTenseQuiz(tense) {
+  const qs = state.quizStates[tense.id];
+  const questions = QUIZZES[tense.id];
+  if(!questions || questions.length===0) return '<p>No questions available.</p>';
+  const q = questions[qs.current];
+  const isLast = qs.current === questions.length-1;
+  const total = questions.length;
+  const labels = ['a','b','c','d'];
+  let html = `
+    <div class="score-bar">
+      <span class="score-label">Score</span>
+      <span class="score-value">${qs.score}</span><span class="score-total">/ ${total}</span>
+      <div class="bar-track"><div class="bar-fill" style="width:${(qs.score/total)*100}%"></div></div>
+    </div>
+    <div class="quiz-container">
+      <div class="quiz-question">
+        <div class="q-text"><span class="q-num">Question ${qs.current+1} / ${total}:</span> ${q.q}</div>
+        <div class="quiz-options" id="quizOptions">
+  `;
+  q.o.forEach((opt,i)=>{
+    let cls='quiz-option';
+    if(qs.answered){
+      cls+=' disabled';
+      if(i===q.a) cls+=' correct';
+      else if(i===qs.selected) cls+=' wrong';
+    } else if(i===qs.selected){
+      cls+=' selected';
+    }
+    html+=`<div class="${cls}" onclick="selectTenseOption('${tense.id}',${i})" data-idx="${i}">
+      <span class="letter">${labels[i]}</span> ${opt}
+    </div>`;
+  });
+  html+=`</div>`;
+  // Feedback
+  if(qs.answered){
+    const isCorrect = qs.selected === q.a;
+    html+=`<div class="quiz-feedback show ${isCorrect?'correct':'wrong'}">
+      ${isCorrect?'&#10003; Correct!':'&#10007; Sorry, that is not correct.'}
+      ${!isCorrect?` The correct answer is: <strong>${labels[q.a]}) ${q.o[q.a]}</strong>`:''}
+    </div>`;
+  }
+  // Controls
+  html+=`<div class="quiz-controls">`;
+  if(!qs.answered){
+    html+=`<button class="btn btn-primary" onclick="submitTenseAnswer('${tense.id}')" ${qs.selected===null?'disabled':''} id="submitBtn">Check Answer</button>`;
+  } else {
+    if(isLast){
+      html+=`<button class="btn btn-success" onclick="finishTenseQuiz('${tense.id}')">See Results</button>`;
+    } else {
+      html+=`<button class="btn btn-primary" onclick="nextTenseQuestion('${tense.id}')">Next Question &rarr;</button>`;
+    }
+  }
+  if(qs.answered){
+    html+=`<button class="btn btn-secondary" onclick="resetTenseQuiz('${tense.id}')">Reset Quiz</button>`;
+  }
+  html+=`</div></div></div>`;
+  return html;
+}
+
+// ============================================================
+// QUIZ LOGIC — Per Tense
+// ============================================================
+function selectTenseOption(tenseId, idx) {
+  const qs = state.quizStates[tenseId];
+  if(qs.answered) return;
+  qs.selected = idx;
+  renderTense(document.getElementById('mainContent'), tenseId);
+}
+
+function submitTenseAnswer(tenseId) {
+  const qs = state.quizStates[tenseId];
+  if(qs.selected===null || qs.answered) return;
+  qs.answered = true;
+  if(qs.selected === QUIZZES[tenseId][qs.current].a){
+    qs.score++;
+  }
+  renderTense(document.getElementById('mainContent'), tenseId);
+}
+
+function nextTenseQuestion(tenseId) {
+  const qs = state.quizStates[tenseId];
+  if(qs.current < QUIZZES[tenseId].length-1){
+    qs.current++;
+    qs.answered = false;
+    qs.selected = null;
+  }
+  renderTense(document.getElementById('mainContent'), tenseId);
+}
+
+function finishTenseQuiz(tenseId) {
+  const qs = state.quizStates[tenseId];
+  const total = QUIZZES[tenseId].length;
+  qs.completed = true;
+  if(qs.score === total){
+    state.completedTenses.add(tenseId);
+  } else if (qs.score >= Math.ceil(total/2)) {
+    state.completedTenses.add(tenseId);
+  }
+  updateDots();
+  updateProgress();
+  showModal(
+    qs.score === total ? '&#127942;' : qs.score >= Math.ceil(total/2) ? '&#128170;' : '&#128218;',
+    qs.score === total ? 'Perfect Score!' : qs.score >= Math.ceil(total/2) ? 'Good Work!' : 'Keep Practicing!',
+    `${qs.score} / ${total}`,
+    qs.score === total ? 'You answered all questions correctly!' : qs.score >= Math.ceil(total/2) ? 'You passed the quiz. Try to get a perfect score!' : 'Review the lesson and try again.',
+    tenseId
+  );
+}
+
+function resetTenseQuiz(tenseId) {
+  const qs = state.quizStates[tenseId];
+  qs.current = 0;
+  qs.score = 0;
+  qs.answered = false;
+  qs.selected = null;
+  qs.completed = false;
+  renderTense(document.getElementById('mainContent'), tenseId);
+}
+
+function retryQuiz() {
+  // handled in modal
+}
+
+// ============================================================
+// MODAL
+// ============================================================
+let modalTenseId = null;
+function showModal(icon, title, score, msg, tenseId) {
+  modalTenseId = tenseId || null;
+  document.getElementById('modalIcon').innerHTML = icon;
+  document.getElementById('modalTitle').textContent = title;
+  document.getElementById('modalScore').textContent = score;
+  document.getElementById('modalMsg').textContent = msg;
+  document.getElementById('modalOverlay').classList.add('show');
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('show');
+  modalTenseId = null;
+}
+
+// ============================================================
+// SECTION: PRACTICE
+// ============================================================
+function renderPractice(container) {
+  let html = `
+    <div class="section-card fade-in">
+      <h2>&#128221; Practice Exercises</h2>
+      <p class="subtitle">Rewrite the sentences in the tense shown. Click "Show Answer" to check.</p>
+  `;
+  PRACTICE_EXERCISES.forEach((ex,i)=>{
+    const revealed = state.practiceRevealed[i];
+    html+=`
+      <div class="practice-card">
+        <div class="p-task"><strong>${i+1}.</strong> ${ex.instruction}</div>
+        <div class="p-task" style="font-style:italic;color:var(--primary);margin-bottom:6px">${ex.sentence}</div>
+        <textarea class="p-input" rows="2" placeholder="Write your answer here..." id="pInput${i}"></textarea>
+        <div class="p-controls">
+          <button class="btn btn-sm btn-outline" onclick="revealPracticeAnswer(${i})">${revealed?'Hide Answer':'Show Answer'}</button>
+        </div>
+        <div class="p-answer ${revealed?'show':''}" id="pAnswer${i}">
+          <strong>Model answer:</strong> ${ex.answer}<br>
+          <small style="color:var(--gray-400)">${ex.hint}</small>
+        </div>
+      </div>
+    `;
+  });
+  html+=`</div>`;
+  container.innerHTML = html;
+}
+
+function revealPracticeAnswer(idx) {
+  state.practiceRevealed[idx] = !state.practiceRevealed[idx];
+  renderPractice(document.getElementById('mainContent'));
+}
+
+// ============================================================
+// SECTION: MIXED QUIZ
+// ============================================================
+function renderMixedQuiz(container) {
+  const mq = state.mixedQuizState;
+  const q = MIXED_QUIZ[mq.current];
+  const total = MIXED_QUIZ.length;
+  const labels = ['a','b','c','d'];
+  let html = `
+    <div class="section-card fade-in">
+      <h2>&#128203; Mixed Tenses Quiz</h2>
+      <p class="subtitle">Test your knowledge of all tenses! ${mq.completed ? 'You have already completed this quiz.' : ''}</p>
+      <div class="score-bar">
+        <span class="score-label">Score</span>
+        <span class="score-value">${mq.score}</span><span class="score-total">/ ${total}</span>
+        <div class="bar-track"><div class="bar-fill" style="width:${(mq.score/total)*100}%"></div></div>
+      </div>
+      <div class="quiz-container">
+        <div class="quiz-question">
+          <div class="q-text"><span class="q-num">Question ${mq.current+1} / ${total}:</span> ${q.q}</div>
+          <div style="font-size:12px;color:var(--gray-400);margin-bottom:8px">(${q.tense})</div>
+          <div class="quiz-options" id="mixedQuizOptions">
+  `;
+  q.o.forEach((opt,i)=>{
+    let cls='quiz-option';
+    if(mq.answered){
+      cls+=' disabled';
+      if(i===q.a) cls+=' correct';
+      else if(i===mq.selected) cls+=' wrong';
+    } else if(i===mq.selected){
+      cls+=' selected';
+    }
+    html+=`<div class="${cls}" onclick="selectMixedOption(${i})" data-idx="${i}">
+      <span class="letter">${labels[i]}</span> ${opt}
+    </div>`;
+  });
+  html+=`</div>`;
+  if(mq.answered){
+    const isCorrect = mq.selected === q.a;
+    html+=`<div class="quiz-feedback show ${isCorrect?'correct':'wrong'}">
+      ${isCorrect?'&#10003; Correct!':'&#10007; The correct answer is: <strong>'+labels[q.a]+') '+q.o[q.a]+'</strong>'}
+    </div>`;
+  }
+  html+=`<div class="quiz-controls">`;
+  if(!mq.answered){
+    html+=`<button class="btn btn-primary" onclick="submitMixedAnswer()" ${mq.selected===null?'disabled':''} id="mixedSubmitBtn">Check Answer</button>`;
+  } else {
+    if(mq.current < total-1){
+      html+=`<button class="btn btn-primary" onclick="nextMixedQuestion()">Next Question &rarr;</button>`;
+    } else {
+      html+=`<button class="btn btn-success" onclick="finishMixedQuiz()">See Results</button>`;
+    }
+  }
+  if(mq.answered || mq.completed){
+    html+=`<button class="btn btn-secondary" onclick="resetMixedQuiz()">Reset Quiz</button>`;
+  }
+  html+=`</div></div></div>`;
+  container.innerHTML = html;
+}
+
+function selectMixedOption(idx) {
+  if(state.mixedQuizState.answered) return;
+  state.mixedQuizState.selected = idx;
+  renderMixedQuiz(document.getElementById('mainContent'));
+}
+
+function submitMixedAnswer() {
+  const mq = state.mixedQuizState;
+  if(mq.selected===null || mq.answered) return;
+  mq.answered = true;
+  if(mq.selected === MIXED_QUIZ[mq.current].a) mq.score++;
+  renderMixedQuiz(document.getElementById('mainContent'));
+}
+
+function nextMixedQuestion() {
+  const mq = state.mixedQuizState;
+  if(mq.current < MIXED_QUIZ.length-1){
+    mq.current++;
+    mq.answered = false;
+    mq.selected = null;
+  }
+  renderMixedQuiz(document.getElementById('mainContent'));
+}
+
+function finishMixedQuiz() {
+  const mq = state.mixedQuizState;
+  const total = MIXED_QUIZ.length;
+  mq.completed = true;
+  let icon, title, msg;
+  if(mq.score === total){icon='&#127942;';title='Perfect Score!';msg='You mastered all tenses! Excellent work!';}
+  else if(mq.score >= 10){icon='&#128170;';title='Great Job!';msg='You have a strong understanding of English tenses.';}
+  else if(mq.score >= 7){icon='&#128221;';title='Good Effort!';msg='Keep practicing to improve your score.';}
+  else {icon='&#128218;';title='Keep Studying';msg='Review the lessons and try again.';}
+  showModal(icon, title, `${mq.score} / ${total}`, msg, null);
+  renderMixedQuiz(document.getElementById('mainContent'));
+}
+
+function resetMixedQuiz() {
+  state.mixedQuizState = {current:0,score:0,answered:false,completed:false,selected:null};
+  renderMixedQuiz(document.getElementById('mainContent'));
+}
+
+// ============================================================
+// SECTION: SUMMARY
+// ============================================================
+function renderSummary(container) {
+  let html = `
+    <div class="section-card fade-in">
+      <h2>&#128202; Summary &amp; Study Tips</h2>
+      <p class="subtitle">Quick reference table, common mistakes, and study advice.</p>
+
+      <h3 style="font-size:17px;margin:20px 0 10px">Tense Summary Table</h3>
+      <div style="overflow-x:auto">
+      <table class="summary-table">
+        <thead><tr><th>Tense</th><th>Structure</th><th>Main Use</th><th>Example</th></tr></thead>
+        <tbody>
+  `;
+  TENSES.forEach(t=>{
+    html+=`<tr>
+      <td class="tense-name">${t.name}</td>
+      <td style="font-size:12px">${t.structure.split('<br>')[0]}</td>
+      <td style="font-size:12px">${t.usage[0]}</td>
+      <td style="font-size:12px">${t.examples[0]}</td>
+    </tr>`;
+  });
+  html+=`</tbody></table></div>`;
+
+  // Tense selection tips
+  html+=`
+    <h3 style="font-size:17px;margin:24px 0 10px">&#128161; How to Choose the Correct Tense</h3>
+    <div class="accordion">
+      <div class="accordion-item open">
+        <button class="accordion-header" onclick="toggleAccordion(this)">Tip 1: Look at the Time Expression <span class="icon">&#9660;</span></button>
+        <div class="accordion-body">
+          <p>Every day, always, usually &rarr; Simple Present</p>
+          <p>Now, at the moment &rarr; Present Continuous</p>
+          <p>Yesterday, last week, ago &rarr; Simple Past</p>
+          <p>Tomorrow, next week &rarr; Simple Future or Present Continuous</p>
+          <p>For, since &rarr; Perfect or Perfect Continuous</p>
+          <p>By + future time &rarr; Future Perfect or Future Perfect Continuous</p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">Tip 2: Is the Action Finished or In Progress? <span class="icon">&#9660;</span></button>
+        <div class="accordion-body">
+          <p>Finished &rarr; Simple tense</p>
+          <p>In progress &rarr; Continuous tense</p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">Tip 3: Does It Connect to Now? <span class="icon">&#9660;</span></button>
+        <div class="accordion-body">
+          <p>If the past action has a result now &rarr; Present Perfect</p>
+          <p>If the past action is completely finished &rarr; Simple Past</p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">Tip 4: Which Action Happened First? <span class="icon">&#9660;</span></button>
+        <div class="accordion-body">
+          <p>When talking about two past events, the earlier one &rarr; Past Perfect</p>
+          <p>If order is already clear &rarr; Simple Past for both</p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">Tip 5: Is the Future Plan Fixed or Spontaneous? <span class="icon">&#9660;</span></button>
+        <div class="accordion-body">
+          <p>Fixed arrangement (with a time) &rarr; Present Continuous</p>
+          <p>Decision at the moment &rarr; will</p>
+          <p>Prediction &rarr; will</p>
+          <p>Scheduled event &rarr; Simple Present</p>
+        </div>
+      </div>
+    </div>
+  `;
+
+  // Common mistakes for Arabic learners
+  html+=`
+    <h3 style="font-size:17px;margin:24px 0 10px">&#9888; Common Mistakes Arabic Learners Make</h3>
+    <div class="accordion">
+  `;
+  COMMON_MISTAKES.forEach((m,i)=>{
+    html+=`
+      <div class="accordion-item ${i===0?'open':''}">
+        <button class="accordion-header" onclick="toggleAccordion(this)">${m.title} <span class="icon">&#9660;</span></button>
+        <div class="accordion-body">
+          <p>${m.desc}</p>
+          <div class="mistake-box">
+            <p><span class="wrong">${m.wrong}</span> &rarr; <span class="correct">${m.correct}</span></p>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+  html+=`</div>`;
+
+  // Study tips
+  html+=`
+    <h3 style="font-size:17px;margin:24px 0 10px">&#128218; Study Tips</h3>
+  `;
+  STUDY_TIPS.forEach((tip,i)=>{
+    html+=`<div class="tip-card"><div class="tip-num">${i+1}</div><div class="tip-text">${tip}</div></div>`;
+  });
+
+  html+=`
+    <div style="text-align:center;margin-top:24px">
+      <button class="btn btn-primary" onclick="navigateTo('dashboard')">Back to Overview</button>
+      <button class="btn btn-secondary" onclick="navigateTo('practice')" style="margin-left:8px">Practice Exercises</button>
+      <button class="btn btn-secondary" onclick="navigateTo('mixed-quiz')" style="margin-left:8px">Mixed Quiz</button>
+    </div>
+  `;
+  html+=`</div>`;
+  container.innerHTML = html;
+}
+
+// ============================================================
+// UTILITY
+// ============================================================
+function toggleAccordion(btn) {
+  const item = btn.closest('.accordion-item');
+  if(item) item.classList.toggle('open');
+}
+
+// Hamburger menu
+document.getElementById('hamburgerBtn').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+
+// Init
+navigateTo('dashboard');
+</script>
+</body>
+</html>
