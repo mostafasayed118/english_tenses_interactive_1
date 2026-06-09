@@ -3,12 +3,35 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>English Tenses — Interactive Learning Module</title>
+<title>English Tenses & Grammar — Interactive Learning</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--primary:#2563eb;--primary-dark:#1d4ed8;--primary-light:#dbeafe;--secondary:#10b981;--secondary-light:#d1fae5;--amber:#f59e0b;--amber-light:#fef3c7;--red:#ef4444;--red-light:#fee2e2;--gray-50:#f8fafc;--gray-100:#f1f5f9;--gray-200:#e2e8f0;--gray-300:#cbd5e1;--gray-400:#94a3b8;--gray-500:#64748b;--gray-600:#475569;--gray-700:#334155;--gray-800:#1e293b;--gray-900:#0f172a;--shadow-sm:0 1px 2px rgba(0,0,0,.05);--shadow:0 1px 3px rgba(0,0,0,.1),0 1px 2px rgba(0,0,0,.06);--shadow-md:0 4px 6px rgba(0,0,0,.07),0 2px 4px rgba(0,0,0,.06);--shadow-lg:0 10px 15px rgba(0,0,0,.1),0 4px 6px rgba(0,0,0,.05);--radius:8px;--radius-lg:12px;--transition:.2s ease}
+:root{--primary:#2563eb;--primary-dark:#1d4ed8;--primary-light:#dbeafe;--secondary:#10b981;--secondary-light:#d1fae5;--amber:#f59e0b;--amber-light:#fef3c7;--red:#ef4444;--red-light:#fee2e2;--purple:#7c3aed;--purple-light:#ede9fe;--teal:#0d9488;--teal-light:#ccfbf1;--gray-50:#f8fafc;--gray-100:#f1f5f9;--gray-200:#e2e8f0;--gray-300:#cbd5e1;--gray-400:#94a3b8;--gray-500:#64748b;--gray-600:#475569;--gray-700:#334155;--gray-800:#1e293b;--gray-900:#0f172a;--shadow-sm:0 1px 2px rgba(0,0,0,.05);--shadow:0 1px 3px rgba(0,0,0,.1),0 1px 2px rgba(0,0,0,.06);--shadow-md:0 4px 6px rgba(0,0,0,.07),0 2px 4px rgba(0,0,0,.06);--shadow-lg:0 10px 15px rgba(0,0,0,.1),0 4px 6px rgba(0,0,0,.05);--radius:8px;--radius-lg:12px;--transition:.2s ease}
 html{scroll-behavior:smooth}
 body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--gray-50);color:var(--gray-800);line-height:1.6;min-height:100vh}
+/* DARK MODE */
+[data-theme="dark"]{--gray-50:#0f172a;--gray-100:#1e293b;--gray-200:#334155;--gray-300:#475569;--gray-400:#94a3b8;--gray-500:#cbd5e1;--gray-600:#e2e8f0;--gray-700:#f1f5f9;--gray-800:#f8fafc;--gray-900:#f8fafc;--shadow-sm:0 1px 2px rgba(0,0,0,.3);--shadow:0 1px 3px rgba(0,0,0,.3),0 1px 2px rgba(0,0,0,.2);--shadow-md:0 4px 6px rgba(0,0,0,.4),0 2px 4px rgba(0,0,0,.3);--shadow-lg:0 10px 15px rgba(0,0,0,.5),0 4px 6px rgba(0,0,0,.3)}
+[data-theme="dark"] .sidebar{background:var(--gray-100);border-right-color:var(--gray-200)}
+[data-theme="dark"] .section-card{background:var(--gray-100);border-color:var(--gray-200)}
+[data-theme="dark"] .quiz-question{background:var(--gray-50)}
+[data-theme="dark"] .quiz-option{background:var(--gray-50)}
+[data-theme="dark"] .practice-card{background:var(--gray-50)}
+[data-theme="dark"] .score-bar{background:var(--gray-50)}
+[data-theme="dark"] .accordion-header{background:var(--gray-50)}
+[data-theme="dark"] .example-box{background:rgba(37,99,235,.15)}
+[data-theme="dark"] .mistake-box{background:rgba(239,68,68,.15)}
+[data-theme="dark"] .compare-box{background:rgba(245,158,11,.15)}
+[data-theme="dark"] .tip-card{background:var(--gray-50)}
+[data-theme="dark"] .dash-card{background:var(--gray-50)}
+[data-theme="dark"] .summary-table th{background:var(--gray-50)}
+[data-theme="dark"] .summary-table td{border-bottom-color:var(--gray-200)}
+[data-theme="dark"] .signal-tags span{background:var(--gray-50);border-color:var(--gray-200)}
+[data-theme="dark"] .accordion-item{border-color:var(--gray-200)}
+[data-theme="dark"] .comparison-col{background:var(--gray-50)}
+[data-theme="dark"] .practice-card .p-input{background:var(--gray-50);color:var(--gray-800)}
+[data-theme="dark"] .modal{background:var(--gray-100)}
+.theme-btn{background:none;border:none;color:#fff;font-size:18px;cursor:pointer;padding:4px;line-height:1;opacity:.8;transition:var(--transition)}
+.theme-btn:hover{opacity:1}
 /* HEADER */
 .app-header{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;position:fixed;top:0;left:0;right:0;z-index:100;box-shadow:var(--shadow-md)}
 .app-header .logo{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:700;letter-spacing:-.3px}
@@ -108,6 +131,8 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--
 .btn-secondary:hover{background:var(--gray-200)}
 .btn-success{background:var(--secondary);color:#fff}
 .btn-success:hover{background:#059669}
+.btn-purple{background:var(--purple);color:#fff}
+.btn-purple:hover{background:#6d28d9}
 .btn-outline{background:transparent;color:var(--primary);border:2px solid var(--primary)}
 .btn-outline:hover{background:var(--primary-light)}
 .btn-sm{padding:6px 14px;font-size:13px}
@@ -147,6 +172,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--
 .summary-table td{padding:10px 12px;border-bottom:1px solid var(--gray-200);color:var(--gray-700);vertical-align:top}
 .summary-table tr:hover td{background:var(--gray-50)}
 .summary-table .tense-name{font-weight:600;color:var(--primary)}
+.summary-table .grammar-name{font-weight:600;color:var(--purple)}
 /* STUDY TIPS */
 .tip-card{display:flex;gap:12px;padding:14px;background:var(--gray-50);border-radius:var(--radius);border:1px solid var(--gray-200);margin-bottom:8px}
 .tip-card .tip-num{width:28px;height:28px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;flex-shrink:0}
@@ -183,6 +209,8 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--
   .quiz-option{padding:8px 12px;font-size:13px}
   .modal{padding:24px 16px}
 }
+/* MERMAID BOX */
+.mermaid-box{background:#fff;border:1px solid var(--gray-200);border-radius:var(--radius);padding:16px;margin:12px 0;overflow-x:auto;font-size:13px}
 /* UTILITY */
 .hidden{display:none!important}
 .mt-8{margin-top:8px}
@@ -205,9 +233,11 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--
     </div>
   </div>
   <div class="header-right">
+    <button class="theme-btn" id="themeToggle" onclick="toggleTheme()" title="Toggle dark mode">&#127769;</button>
+    <button class="theme-btn" onclick="resetAllProgress()" title="Reset all progress" style="font-size:16px">&#8635;</button>
     <div class="header-progress">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-      <span class="progress-num" id="progressNum">0</span><span class="progress-label">/ 13</span>
+      <span class="progress-num" id="progressNum">0</span><span class="progress-label">/ <span id="totalCount">28</span></span>
     </div>
   </div>
 </header>
@@ -288,6 +318,61 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--
         <span class="status-dot" style="background:var(--gray-400)"></span> Summary & Tips
       </button>
     </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="section-label">Conditionals</div>
+      <button class="sidebar-item" data-section="grammar" data-grammar="zero-conditional" onclick="navigateTo('grammar','zero-conditional')">
+        <span class="status-dot" id="dot-zero-conditional"></span> Zero Conditional
+      </button>
+      <button class="sidebar-item" data-section="grammar" data-grammar="first-conditional" onclick="navigateTo('grammar','first-conditional')">
+        <span class="status-dot" id="dot-first-conditional"></span> First Conditional
+      </button>
+      <button class="sidebar-item" data-section="grammar" data-grammar="second-conditional" onclick="navigateTo('grammar','second-conditional')">
+        <span class="status-dot" id="dot-second-conditional"></span> Second Conditional
+      </button>
+      <button class="sidebar-item" data-section="grammar" data-grammar="third-conditional" onclick="navigateTo('grammar','third-conditional')">
+        <span class="status-dot" id="dot-third-conditional"></span> Third Conditional
+      </button>
+      <button class="sidebar-item" data-section="grammar" data-grammar="mixed-conditional" onclick="navigateTo('grammar','mixed-conditional')">
+        <span class="status-dot" id="dot-mixed-conditional"></span> Mixed Conditional
+      </button>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="section-label">Essential Grammar</div>
+      <button class="sidebar-item" data-section="grammar" data-grammar="passive-voice" onclick="navigateTo('grammar','passive-voice')">
+        <span class="status-dot" id="dot-passive-voice"></span> Passive Voice
+      </button>
+      <button class="sidebar-item" data-section="grammar" data-grammar="reported-speech" onclick="navigateTo('grammar','reported-speech')">
+        <span class="status-dot" id="dot-reported-speech"></span> Reported Speech
+      </button>
+      <button class="sidebar-item" data-section="grammar" data-grammar="modal-verbs" onclick="navigateTo('grammar','modal-verbs')">
+        <span class="status-dot" id="dot-modal-verbs"></span> Modal Verbs
+      </button>
+      <button class="sidebar-item" data-section="grammar" data-grammar="wishes-regrets" onclick="navigateTo('grammar','wishes-regrets')">
+        <span class="status-dot" id="dot-wishes-regrets"></span> Wishes & Regrets
+      </button>
+      <button class="sidebar-item" data-section="grammar" data-grammar="relative-clauses" onclick="navigateTo('grammar','relative-clauses')">
+        <span class="status-dot" id="dot-relative-clauses"></span> Relative Clauses
+      </button>
+      <button class="sidebar-item" data-section="grammar" data-grammar="gerund-infinitive" onclick="navigateTo('grammar','gerund-infinitive')">
+        <span class="status-dot" id="dot-gerund-infinitive"></span> Gerund vs Infinitive
+      </button>
+      <button class="sidebar-item" data-section="grammar" data-grammar="used-to" onclick="navigateTo('grammar','used-to')">
+        <span class="status-dot" id="dot-used-to"></span> Used to / Would
+      </button>
+      <button class="sidebar-item" data-section="grammar" data-grammar="articles" onclick="navigateTo('grammar','articles')">
+        <span class="status-dot" id="dot-articles"></span> Articles (a/an/the)
+      </button>
+      <button class="sidebar-item" data-section="grammar" data-grammar="causative" onclick="navigateTo('grammar','causative')">
+        <span class="status-dot" id="dot-causative"></span> Causative Have/Get
+      </button>
+      <button class="sidebar-item" data-section="grammar" data-grammar="prepositions" onclick="navigateTo('grammar','prepositions')">
+        <span class="status-dot" id="dot-prepositions"></span> Prepositions
+      </button>
+    </div>
   </nav>
 
   <!-- MAIN CONTENT -->
@@ -305,7 +390,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--
     <p class="modal-msg" id="modalMsg">You completed the quiz.</p>
     <div class="modal-actions">
       <button class="btn btn-secondary" onclick="closeModal()">Close</button>
-      <button class="btn btn-primary" id="modalRetryBtn" onclick="closeModal();retryQuiz()">Retry</button>
+      <button class="btn btn-primary" id="modalRetryBtn" onclick="closeModal();if(modalGrammatical&&modalTenseId)resetGrammarQuiz(modalTenseId);else if(modalTenseId)resetTenseQuiz(modalTenseId)">Retry</button>
     </div>
   </div>
 </div>
@@ -619,6 +704,109 @@ QUIZZES['future-perfect-continuous']=[
   {q:'By 2035, they _______ in this city for 25 years.',o:['live','will live','will be living','will have been living'],a:3}
 ];
 
+// ============================================================
+// GRAMMAR DATA — Conditionals & Essential Grammar
+// ============================================================
+const GRAMMAR = [
+  {id:'zero-conditional',name:'Zero Conditional',category:'conditionals',definition:'The Zero Conditional describes general truths, habits, and situations that are always true when a certain condition is met.',structure:'If + subject + Simple Present, subject + Simple Present<br>Example: If you heat ice, it melts.',usage:['Scientific facts and general truths (always true)','Habits and routines that always happen','Instructions and commands (can use "when" instead of "if")'],signalWords:'if, when, whenever, every time',examples:['If you heat water to 100°C, it boils.','If I am tired, I drink coffee.','When it rains, the grass gets wet.'],commonMistake:{wrong:'If I will study, I will pass.',correct:'If I study, I pass. (Zero = general truth, not future)',note:'Students use "will" in both clauses. In Zero Conditional, use Simple Present in both.'},comparison:{with:'First Conditional',diff:'Zero = always true (If you heat ice, it melts.)<br>First = possible future (If it rains, I will stay home.)'}},
+  {id:'first-conditional',name:'First Conditional',category:'conditionals',definition:'The First Conditional describes a possible future situation and its likely result.',structure:'If + subject + Simple Present, subject + will + base verb<br>Example: If it rains, I will stay home.',usage:['Real/possible situations in the future','Predictions about what will happen if conditions are met','Promises or warnings about the future'],signalWords:'if, unless, as long as, provided that, in case',examples:['If you study hard, you will pass the exam.','If she calls me, I will tell her the news.','Unless you hurry, you will miss the bus.'],commonMistake:{wrong:'If it will rain, I will stay home.',correct:'If it rains, I will stay home.',note:'Students put "will" in the if-clause. Use Simple Present in the if-clause.'},comparison:{with:'Zero Conditional',diff:'First = possible future (If you study, you will pass.)<br>Zero = always true (If you heat ice, it melts.)'}},
+  {id:'second-conditional',name:'Second Conditional',category:'conditionals',definition:'The Second Conditional describes imaginary or unlikely situations in the present or future.',structure:'If + subject + Simple Past, subject + would + base verb<br>Example: If I had a million dollars, I would travel the world.',usage:['Imaginary situations that are unlikely or impossible now','Advice using "If I were you..."','Dreams and wishes about the present/future'],signalWords:'if, even if, suppose, supposing, what if',examples:['If I won the lottery, I would buy a house.','If I were you, I would talk to the manager.','What would you do if you lost your job?'],commonMistake:{wrong:'If I would be rich, I would buy a car.',correct:'If I were rich, I would buy a car.',note:'Students use "would" in the if-clause. Use Simple Past (or "were" for all subjects) in the if-clause.'},comparison:{with:'First Conditional',diff:'First = possible (If it rains, I will stay.)<br>Second = imaginary (If I were you, I would leave.)'}},
+  {id:'third-conditional',name:'Third Conditional',category:'conditionals',definition:'The Third Conditional describes impossible past situations — things that did NOT happen.',structure:'If + subject + had + V3, subject + would + have + V3<br>Example: If I had studied, I would have passed.',usage:['Regrets about the past (things you wish you had done differently)','Criticizing past mistakes','Imagining how the past could have been different'],signalWords:'if, if only, had I known, otherwise',examples:['If I had woken up earlier, I would not have missed the flight.','She would have passed if she had studied more.','If they had invited me, I would have gone.'],commonMistake:{wrong:'If I would have studied, I would have passed.',correct:'If I had studied, I would have passed.',note:'Students use "would have" in the if-clause. Use "had + V3" in the if-clause.'},comparison:{with:'Second Conditional',diff:'Third = impossible past (If I had studied, I would have passed.)<br>Second = unlikely now (If I studied, I would pass.)'}},
+  {id:'mixed-conditional',name:'Mixed Conditional',category:'conditionals',definition:'Mixed Conditionals combine an unreal past condition with a present result.',structure:'If + subject + had + V3 (past), subject + would + base verb (present)<br>Example: If I had studied medicine, I would be a doctor now.',usage:['A past situation that did not happen, with a result that affects the present','Explaining why something is the way it is now because of a past action/inaction'],signalWords:'if, now, today, right now, would be',examples:['If I had accepted that job, I would be living in London now.','If she had not missed the bus, she would be here with us.','They would not be in trouble now if they had listened.'],commonMistake:{wrong:'If I had studied, I would have been a doctor now.',correct:'If I had studied, I would be a doctor now.',note:'Mixed: past condition (had + V3) + present result (would + base verb).'},comparison:{with:'Third Conditional',diff:'Mixed = past > present (If I had studied, I would be rich now.)<br>Third = past > past (If I had studied, I would have passed.)'}},
+  {id:'passive-voice',name:'Passive Voice',category:'essential',definition:'The Passive Voice shifts focus from who did the action to the action itself or who received it.',structure:'Subject + be (conjugated) + past participle (V3) + (by + agent)<br>Example: English is spoken worldwide.',usage:['When the doer is unknown, obvious, or unimportant','To focus on the action or the receiver of the action','Formal writing and scientific reports'],signalWords:'by, is/are/am + V3, was/were + V3, be + V3, been + V3',examples:['The letter was written by Ali.','My car has been stolen.','English is taught in most schools.','The bridge will be completed next year.'],commonMistake:{wrong:'The window was broke.',correct:'The window was broken.',note:'Students forget that the past participle (V3) is needed after "be" in passive.'},comparison:{with:'Active Voice',diff:'Active = subject does action (Ali wrote the letter.)<br>Passive = subject receives action (The letter was written by Ali.)'}},
+  {id:'reported-speech',name:'Reported Speech',category:'essential',definition:'Reported Speech (Indirect Speech) reports what someone said without quoting their exact words.',structure:'Reporting verb + that + clause (with tense shift)<br>Present Past, Past Past Perfect, will would<br>Example: She said (that) she was tired.',usage:['Reporting statements, questions, and commands','Tense shifts: present past, past past perfect, will would','Time/place changes: now then, today that day, here there'],signalWords:'said, told, asked, explained, replied, stated, claimed, mentioned',examples:['She said she was tired. (from "I am tired")','He asked if I had eaten. (from "Have you eaten?")','She told me to go away. (from "Go away!")','He said he would come the next day. (from "I will come tomorrow")'],commonMistake:{wrong:'She said me that she is happy.',correct:'She told me that she was happy.',note:'Students confuse say and tell. Say + (that) | Tell + person + (that). Also forget tense shift.'},comparison:{with:'Direct Speech',diff:'Direct = exact words in quotes (She said, "I am happy.")<br>Reported = paraphrased, tense shifted (She said she was happy.)'}},
+  {id:'modal-verbs',name:'Modal Verbs',category:'essential',definition:'Modal verbs express ability, permission, obligation, possibility, advice, and necessity.',structure:'Modal + base verb (no "to", no -s)<br>Can, could, may, might, must, should, ought to, have to, need to, will, would, shall',usage:['Ability: I can swim. / I could swim when I was five.','Permission: May I come in? / Can I use your phone?','Obligation: You must wear a seatbelt. / You have to finish this.','Advice: You should see a doctor. / You ought to apologize.','Possibility: It might rain. / She may be late.'],signalWords:'can, could, may, might, must, should, ought to, have to, had better, need to',examples:['You must finish your homework before you go out.','She can speak three languages fluently.','You should not eat so much sugar.','May I use your phone?','He might be at the office; I am not sure.'],commonMistake:{wrong:'He can to swim.',correct:'He can swim.',note:'Students add "to" after modal verbs. Modals are followed directly by the base verb (no to, no -s).'},comparison:{with:'Simple Present',diff:'Modal + base verb: same for all persons (He can / They can no -s)<br>Simple Present adds -s for he/she/it (He swims / They swim)'}},
+  {id:'wishes-regrets',name:'Wishes & Regrets',category:'essential',definition:'We use "wish" and "if only" to talk about things we want to be different in the present, past, or future.',structure:'Wish + past tense = present wish (I wish I had more money.)<br>Wish + past perfect = past regret (I wish I had studied.)<br>Wish + would = future complaint (I wish you would stop.)',usage:['Present wish (want to change a present situation): I wish I were taller.','Past regret (wish something had been different): I wish I had not said that.','Future complaint (wish someone would change): I wish you would listen.','If only = stronger version of wish (If only I had known!)'],signalWords:'wish, if only, regret, should have, would rather, had better',examples:['I wish I were better at mathematics. (present and I am not)','If only I had studied harder for the exam. (past I did not)','I wish it would stop raining. (complaint)','I should have called her. (regret about the past)'],commonMistake:{wrong:'I wish I am taller.',correct:'I wish I were taller.',note:'After "wish," use past tense for present meaning. Always use "were" for all subjects (I wish I were..., NOT I wish I was...).'},comparison:{with:'Third Conditional',diff:'Wish = feeling (I wish I had studied.)<br>Third Conditional = action-outcome (If I had studied, I would have passed.)'}},
+  {id:'relative-clauses',name:'Relative Clauses',category:'essential',definition:'Relative clauses give extra information about a noun using relative pronouns (who, whom, which, that, whose).',structure:'Defining (essential): The man who lives next door is a doctor.<br>Non-defining (extra info, with commas): My brother, who lives in Cairo, is an engineer.',usage:['Defining relative clauses: necessary to identify the person/thing (no commas)','Non-defining relative clauses: extra information not essential (use commas)','Who/that = people, Which/that = things, Whose = possession, Where = places, When = times'],signalWords:'who, whom, which, that, whose, where, when, why',examples:['The woman who lives next door is a teacher. (defining)','The car which I want to buy is expensive. (defining)','My father, who is 65, still works every day. (non-defining)','The student whose phone rang was embarrassed.','The house where I grew up has been demolished.'],commonMistake:{wrong:'The man which lives next door is a doctor.',correct:'The man who lives next door is a doctor.',note:'Students use "which" for people. Use "who" for people, "which" for things.'},comparison:{with:'Adjective',diff:'Adjective = before noun (the tall man)<br>Relative clause = after noun (the man who is tall)'}},
+  {id:'gerund-infinitive',name:'Gerund vs Infinitive',category:'essential',definition:'Gerunds (verb+ing as a noun) and infinitives (to + base verb) follow different verbs with different meanings.',structure:'Gerund: verb + ing (used as a noun) Swimming is fun.<br>Infinitive: to + base verb I want to go home.',usage:['Gerund after certain verbs: enjoy, avoid, suggest, mind, finish, practice, recommend','Infinitive after certain verbs: want, need, decide, hope, promise, agree, refuse','Change in meaning: stop + gerund = quit; stop + infinitive = pause to do','Change in meaning: remember + gerund = recall; remember + infinitive = not forget','Prepositions + gerund: interested in, good at, tired of, afraid of'],signalWords:'enjoy, avoid, suggest, mind, want, need, decide, hope, promise, stop, remember, forget, try',examples:['I enjoy reading books in my free time. (gerund)','She decided to study abroad. (infinitive)','I stopped smoking last year. (= I quit)','I stopped to buy coffee on the way. (= I paused)','Would you mind opening the window?'],commonMistake:{wrong:'I enjoy to swim in the sea.',correct:'I enjoy swimming in the sea.',note:'After "enjoy," use gerund (-ing), not infinitive. Many verbs have specific patterns.'},comparison:{with:'Both possible different meaning',diff:'Stop + gerund = quit (I stopped smoking.)<br>Stop + infinitive = pause to do (I stopped to smoke.)'}},
+  {id:'used-to',name:'Used to / Would',category:'essential',definition:'Used to and would describe past habits, states, and repeated actions that no longer happen.',structure:'Used to + base verb (past habits/states that stopped)<br>Would + base verb (past repeated actions, NOT states)<br>Be used to + noun/gerund (be accustomed to)<br>Get used to + noun/gerund (become accustomed to)',usage:['Used to = past habits AND past states that no longer exist (I used to smoke)','Would = past repeated actions only, NOT states (We would visit grandma)','Be used to = be accustomed to (I am used to waking up early.)','Get used to = become accustomed to (You will get used to the weather.)'],signalWords:'used to, would (past), be used to, get used to, no longer, not anymore',examples:['I used to play football every day when I was young.','She used to have long hair. (state would is NOT possible)','My family would go to the beach every summer.','I am not used to eating such spicy food.','You will soon get used to working from home.'],commonMistake:{wrong:'I used to studied hard.',correct:'I used to study hard.',note:'Students add past tense after "used to." Use base verb: used to + base verb.'},comparison:{with:'Simple Past',diff:'Used to = past habit that stopped (I used to play cricket.)<br>Simple Past = a single finished action (I played cricket last Friday.)'}},
+  {id:'articles',name:'Articles (a/an/the)',category:'essential',definition:'Articles determine whether a noun is specific or general, known or unknown to the listener.',structure:'a/an = indefinite, general, first mention (singular countable nouns)<br>the = definite, specific, or already known<br>zero article = general plural or uncountable nouns',usage:['a/an = not specific, first time mentioned, one of many (I saw a cat.)','the = specific, known, already mentioned, unique (The cat was black.)','zero article = general statements (Cats are cute.), meals, proper nouns, institutions'],signalWords:'a, an, the, some, any, no article',examples:['I bought a car yesterday. (first mention)','The car is red. (now the listener knows which)','An apple a day keeps the doctor away.','The sun rises in the east. (unique)','I love music. (general no article)','She is at school. (institution no article)'],commonMistake:{wrong:'I have car.',correct:'I have a car.',note:'Arabic speakers often omit articles. Singular countable nouns almost always need an article.'},comparison:{with:'Arabic (al-)',diff:'Arabic uses "al-" (the) more broadly than English.<br>English uses "the" only when specific/known.<br>English uses "a/an" for general singular nouns.'}},
+  {id:'causative',name:'Causative Have/Get',category:'essential',definition:'The causative expresses that you arrange for someone else to do something for you.',structure:'Have + object + V3 (I had my hair cut.)<br>Get + object + V3 (I got my car fixed.)<br>Have + person + base verb (I had him fix the car.)<br>Get + person + to + base verb (I got him to fix the car.)',usage:['Services: arranging for professionals (I had my hair cut.)','Getting someone to do something (I got the technician to check my internet.)','Experience: something bad happening to you (I had my phone stolen.)'],signalWords:'have something done, get something done, make someone do, let someone do',examples:['I need to have my computer repaired.','She had her hair styled for the wedding.','He got his car washed yesterday.','I had my wallet stolen on the bus.','I got my son to clean his room.'],commonMistake:{wrong:'I had cut my hair.',correct:'I had my hair cut.',note:'Students confuse causative with past perfect. Causative: have + object + V3.'},comparison:{with:'Active (I did it myself)',diff:'Active = I did it (I washed my car.)<br>Causative = someone else did it (I had my car washed.)'}},
+  {id:'prepositions',name:'Prepositions (Time & Place)',category:'essential',definition:'Prepositions show relationships between words, especially time and place.',structure:'AT + specific time/point (at 5 oclock, at night, at the corner)<br>IN + months/years/enclosed spaces (in July, in Egypt)<br>ON + days/dates/surfaces (on Monday, on July 5th, on the table)',usage:['Time: at = clock times/night (at 3 PM); in = months/years/seasons (in summer); on = days/dates (on Friday)','Place: at = specific points (at the door); in = cities/countries (in Cairo); on = surfaces/streets (on the table)'],signalWords:'at, in, on, by, for, since, ago, until, during, from...to, between, among, beside, next to, opposite, near',examples:['The meeting is at 3 oclock.','I was born in July.','Her birthday is on Monday.','She lives in Cairo.','The book is on the shelf.'],commonMistake:{wrong:'I will meet you on Monday at 8 oclock in the morning.',correct:'I will meet you at 8 oclock on Monday morning.',note:'Word order: at + time on + day. Stack correctly.'},comparison:{with:'No preposition',diff:'Some phrases drop the preposition: "this morning" (not in), "last week" (not in), "next year" (not in), "every day" (not on).'}}
+];
+
+const ALL_TOPICS = [...TENSES, ...GRAMMAR];
+
+// Grammar quizzes
+const GRAMMAR_QUIZZES = {};
+GRAMMAR.forEach(g=>{GRAMMAR_QUIZZES[g.id]=[]});
+
+GRAMMAR_QUIZZES['zero-conditional']=[
+  {q:'If you _______ ice, it melts.',o:['will heat','heat','heated','are heating'],a:1},
+  {q:'If I _______ late, I miss the bus.',o:['will be','am','was','would be'],a:1},
+  {q:'When it _______, the streets get wet.',o:['will rain','rained','rains','would rain'],a:2}
+];
+GRAMMAR_QUIZZES['first-conditional']=[
+  {q:'If it _______ tomorrow, I will stay home.',o:['rains','will rain','rained','would rain'],a:0},
+  {q:'If she studies hard, she _______ the exam.',o:['passes','passed','will pass','would pass'],a:2},
+  {q:'Unless you hurry, you _______ the bus.',o:['miss','missed','will miss','are missing'],a:2}
+];
+GRAMMAR_QUIZZES['second-conditional']=[
+  {q:'If I _______ a million dollars, I would travel.',o:['have','had','would have','will have'],a:1},
+  {q:'If I _______ you, I would apologize.',o:['was','am','were','would be'],a:2},
+  {q:'What would you do if you _______ your job?',o:['lost','lose','will lose','would lose'],a:0}
+];
+GRAMMAR_QUIZZES['third-conditional']=[
+  {q:'If I had studied, I _______ the exam.',o:['passed','would pass','would have passed','had passed'],a:2},
+  {q:'She would have come if she _______ about the party.',o:['knows','knew','had known','would know'],a:2},
+  {q:'If they had left earlier, they _______ the train.',o:["wouldn't miss","wouldn't have missed","didn't miss","hadn't missed"],a:1}
+];
+GRAMMAR_QUIZZES['mixed-conditional']=[
+  {q:'If I had studied medicine, I _______ a doctor now.',o:['will be','would be','would have been','was'],a:1},
+  {q:'She would be here now if she _______ the early bus.',o:['caught','had caught','would catch','has caught'],a:1},
+  {q:'If he had not wasted his time, he _______ a better position today.',o:['would have had','would have','would be having','has'],a:1}
+];
+GRAMMAR_QUIZZES['passive-voice']=[
+  {q:'English _______ all over the world.',o:['speaks','is spoken','is speaking','spoke'],a:1},
+  {q:'The window _______ by the boy yesterday.',o:['broke','was broken','was broke','had broken'],a:1},
+  {q:'My car _______. (stolen, just now)',o:['has been stolen','has stolen','was stole','is stolen'],a:0}
+];
+GRAMMAR_QUIZZES['reported-speech']=[
+  {q:'She said, "I am tired." - She said that she _______ tired.',o:['is','was','am','were'],a:1},
+  {q:'He asked, "Do you like coffee?" - He asked _______ I liked coffee.',o:['that','whether','what','which'],a:1},
+  {q:'"Go away!" - She told me _______.',o:['go away','to go away','going away','went away'],a:1}
+];
+GRAMMAR_QUIZZES['modal-verbs']=[
+  {q:'You _______ finish your homework before going out.',o:['must','must to','have must','musts'],a:0},
+  {q:'He _______ speak three languages fluently.',o:['can to','cans','can','is can'],a:2},
+  {q:'You _______ see a doctor; you look very ill.',o:['should to','ought','should','had'],a:2}
+];
+GRAMMAR_QUIZZES['wishes-regrets']=[
+  {q:'I wish I _______ taller.',o:['am','was','were','will be'],a:2},
+  {q:'If only I _______ harder for the exam.',o:['study','studied','had studied','would study'],a:2},
+  {q:'I should _______ her before she left.',o:['call','called','have called','calling'],a:2}
+];
+GRAMMAR_QUIZZES['relative-clauses']=[
+  {q:'The woman _______ lives next door is a doctor.',o:['which','who','whom','what'],a:1},
+  {q:'The car _______ I want to buy is very expensive.',o:['who','whom','that','what'],a:2},
+  {q:'My father, _______ is 65, still works every day.',o:['which','that','who','whom'],a:2}
+];
+GRAMMAR_QUIZZES['gerund-infinitive']=[
+  {q:'I enjoy _______ books in my free time.',o:['read','to read','reading','reads'],a:2},
+  {q:'She decided _______ medicine at university.',o:['study','to study','studying','studies'],a:1},
+  {q:'Would you mind _______ the window?',o:['open','to open','opening','opened'],a:2}
+];
+GRAMMAR_QUIZZES['used-to']=[
+  {q:'I _______ play football every day when I was young.',o:['used to','use to','am used to','was used to'],a:0},
+  {q:'She is not used to _______ up early.',o:['wake','waking','woke','wakes'],a:1},
+  {q:'When I was a child, my family _______ go to the beach every summer.',o:['used to','would','were used to','both a & b'],a:3}
+];
+GRAMMAR_QUIZZES['articles']=[
+  {q:'I saw _______ cat in the garden.',o:['a','an','the','-'],a:0},
+  {q:'_______ sun rises in the east.',o:['A','An','The','-'],a:2},
+  {q:'I love _______. (in general)',o:['the music','a music','an music','music'],a:3}
+];
+GRAMMAR_QUIZZES['causative']=[
+  {q:'I need to have my phone _______.',o:['repair','repairing','repaired','to repair'],a:2},
+  {q:'She had her hair _______ for the wedding.',o:['style','styled','styling','to style'],a:1},
+  {q:'I got my son _______ his room.',o:['clean','cleaned','to clean','cleaning'],a:2}
+];
+GRAMMAR_QUIZZES['prepositions']=[
+  {q:'The meeting is _______ 3 oclock.',o:['in','on','at','by'],a:2},
+  {q:'I was born _______ July.',o:['in','on','at','by'],a:0},
+  {q:'Her birthday is _______ Monday.',o:['in','on','at','by'],a:1}
+];
+
 // Mixed quiz (15 questions)
 const MIXED_QUIZ = [
   {q:'Ali _______ Arabic and English fluently.',o:['speak','speaks','speaking','spoken'],a:1,tense:'Simple Present'},
@@ -635,7 +823,21 @@ const MIXED_QUIZ = [
   {q:'By the time he is 30, he _______ around the world.',o:['travels','will travel','will have traveled','is traveling'],a:2,tense:'Future Perfect'},
   {q:'By next month, I _______ here for exactly one year.',o:['work','will work','will be working','will have been working'],a:3,tense:'Future Perfect Continuous'},
   {q:'The museum _______ at 9 AM every day.',o:['open','opens','is opening','opened'],a:1,tense:'Simple Present (schedule)'},
-  {q:'I _______ just _______ the news. It is very sad.',o:['have / heard','has / heard','am / hearing','was / hearing'],a:0,tense:'Present Perfect'}
+  {q:'I _______ just _______ the news. It is very sad.',o:['have / heard','has / heard','am / hearing','was / hearing'],a:0,tense:'Present Perfect'},
+  {q:'If you _______ ice, it melts.',o:['heat','will heat','heated','are heating'],a:0,tense:'Zero Conditional'},
+  {q:'If I were you, I _______ to the manager.',o:['talk','talked','would talk','will talk'],a:2,tense:'Second Conditional'},
+  {q:'If I had woken up earlier, I _______ the bus.',o:["won't miss","wouldn't miss","wouldn't have missed","don't miss"],a:2,tense:'Third Conditional'},
+  {q:'English _______ all over the world.',o:['speaks','is spoken','is speaking','spoke'],a:1,tense:'Passive Voice'},
+  {q:'She said that she _______ tired.',o:['is','am','was','were'],a:2,tense:'Reported Speech'},
+  {q:'You _______ finish your homework before going out.',o:['must to','must','have must','musts'],a:1,tense:'Modal Verbs'},
+  {q:'I wish I _______ taller.',o:['am','was','were','will be'],a:2,tense:'Wishes'},
+  {q:'The woman _______ lives next door is a teacher.',o:['which','who','whom','what'],a:1,tense:'Relative Clauses'},
+  {q:'I enjoy _______ books in my free time.',o:['read','to read','reading','reads'],a:2,tense:'Gerund vs Infinitive'},
+  {q:'I _______ play football every day when I was young.',o:['used to','use to','am used to','was used to'],a:0,tense:'Used to'},
+  {q:'I saw _______ cat in the garden.',o:['a','an','the','-'],a:0,tense:'Articles'},
+  {q:'I need to have my phone _______.',o:['repair','repairing','repaired','to repair'],a:2,tense:'Causative'},
+  {q:'The meeting is _______ 3 oclock.',o:['in','on','at','by'],a:2,tense:'Prepositions'},
+  {q:'If I had studied medicine, I _______ a doctor now.',o:['will be','would be','would have been','was'],a:1,tense:'Mixed Conditional'}
 ];
 
 // Practice exercises
@@ -649,7 +851,12 @@ const PRACTICE_EXERCISES = [
   {type:'rewrite',instruction:'Change from Simple Past to Past Continuous:',sentence:'I watched TV when she arrived.',hint:'I was watching TV when she arrived.',answer:'I was watching TV when she arrived.'},
   {type:'rewrite',instruction:'Change from Past Continuous to Past Perfect Continuous:',sentence:'They were traveling for five hours when the accident happened.',hint:'They had been traveling for five hours when the accident happened.',answer:'They had been traveling for five hours when the accident happened.'},
   {type:'rewrite',instruction:'Change from Simple Future to Future Continuous:',sentence:'I will work at 10 AM tomorrow.',hint:'I will be working at 10 AM tomorrow.',answer:'I will be working at 10 AM tomorrow.'},
-  {type:'rewrite',instruction:'Change from Future Continuous to Future Perfect:',sentence:'She will be studying when you arrive.',hint:'She will have studied by the time you arrive.',answer:'She will have studied by the time you arrive.'}
+  {type:'rewrite',instruction:'Change from Future Continuous to Future Perfect:',sentence:'She will be studying when you arrive.',hint:'She will have studied by the time you arrive.',answer:'She will have studied by the time you arrive.'},
+  {type:'fill',instruction:'Complete the conditional sentence:',sentence:'If it rains tomorrow, I _______ (stay) home.',hint:'First conditional: if + present, will + verb.',answer:'If it rains tomorrow, I will stay home.'},
+  {type:'fill',instruction:'Change to passive voice:',sentence:'Ali wrote the letter. -',hint:'The letter + was + V3 + by Ali',answer:'The letter was written by Ali.'},
+  {type:'fill',instruction:'Report this sentence:',sentence:'"I am happy," she said. -',hint:'Shift tenses back. "am" becomes "was"',answer:'She said that she was happy.'},
+  {type:'fill',instruction:'Complete with the correct form:',sentence:'She enjoys _______ (swim) in the sea.',hint:'After "enjoy", use the gerund (-ing).',answer:'She enjoys swimming in the sea.'},
+  {type:'fill',instruction:'Complete with the correct form:',sentence:'I wish I _______ (be) taller.',hint:'After "wish", use "were" for all subjects.',answer:'I wish I were taller.'}
 ];
 
 // Common mistakes for Arabic learners
@@ -658,7 +865,10 @@ const COMMON_MISTAKES = [
   {title:'Confusing Present Perfect and Simple Past',desc:'In Arabic, the past tense often covers both meanings.',wrong:'I visited Paris already. (if time is not stated)',correct:'I have visited Paris already.'},
   {title:'Forgetting the -s Ending in Simple Present (He/She/It)',desc:'Arabic verb endings are different from English.',wrong:'He work in a bank.',correct:'He works in a bank.'},
   {title:'Using "will" for Every Future Situation',desc:'Arabic uses one future form (sa- or sawfa). English has many future forms.',wrong:'I will meet my friend tomorrow at 6 PM. (sounds like a decision now)',correct:'I am meeting my friend tomorrow at 6 PM. (fixed plan)'},
-  {title:'Word Order in Questions',desc:'Arabic question formation is different from English.',wrong:'You have seen this movie?',correct:'Have you seen this movie?'}
+  {title:'Word Order in Questions',desc:'Arabic question formation is different from English.',wrong:'You have seen this movie?',correct:'Have you seen this movie?'},
+  {title:'Using "will" in If-Clauses',desc:'In Arabic, the future particle can appear in both clauses. In English, only the result clause gets "will".',wrong:'If it will rain, I will stay home.',correct:'If it rains, I will stay home.'},
+  {title:'Confusing Say and Tell',desc:'Both exist in Arabic but have different structures in English.',wrong:'She said me that she is happy.',correct:'She told me that she was happy.'},
+  {title:'Missing Articles',desc:'Arabic has a different article system. Singular countable nouns often lack articles.',wrong:'I have car.',correct:'I have a car.'}
 ];
 
 const STUDY_TIPS = [
@@ -666,44 +876,105 @@ const STUDY_TIPS = [
   'Practice with Time Markers: When you learn a new tense, learn its time markers too. For example: Simple Past = ago, yesterday, last week. The time marker will remind you which tense to use.',
   'Write a Daily Journal in English: Write 3-4 sentences about your day. Use Simple Past for finished actions and Present Perfect for experiences. This builds natural habit.',
   'Use Color Coding: Choose a color for each aspect: Simple = blue, Continuous = green, Perfect = red, Perfect Continuous = purple. Highlight verb forms to remember patterns.',
-  'Speak in Tenses, Not in Translation: Do not translate from Arabic to English. Think directly in English. Ask yourself: Is this a habit? Is it happening now? Is it finished? Let the answer guide your tense choice.'
+  'Speak in Tenses, Not in Translation: Do not translate from Arabic to English. Think directly in English. Ask yourself: Is this a habit? Is it happening now? Is it finished? Let the answer guide your tense choice.',
+  'Conditionals Cheat Sheet: Zero = if + present, present (always true). First = if + present, will (possible). Second = if + past, would (imaginary). Third = if + had V3, would have V3 (impossible past). Mixed = if + had V3 + would (past condition, present result).',
+  'Passive Voice Shortcut: Find the object, make it the subject, add "be" in the correct tense, use V3, add "by + doer" if important. Active: Ali wrote the letter. Passive: The letter was written by Ali.',
+  'Master the 4 Most Useful Conditionals: (1) If + present, will for promises/warnings. (2) If I were you, I would... for advice. (3) If I had known, I would have... for regrets. (4) Mixed: If + had V3 + would for past affecting present.'
 ];
 
 // ============================================================
-// STATE
+// STATE — with localStorage persistence
 // ============================================================
-let state = {
-  currentSection: 'dashboard',
-  currentTenseId: null,
-  quizStates: {},      // {tenseId: {current:0, score:0, answered:false, completed:false}}
-  mixedQuizState: {current:0, score:0, answered:false, completed:false},
-  practiceRevealed: Array(PRACTICE_EXERCISES.length).fill(false),
-  completedTenses: new Set()
-};
+const STORAGE_KEY = 'english_tenses_progress';
 
-// Initialize quiz states
-TENSES.forEach(t=>{
-  state.quizStates[t.id]={current:0,score:0,answered:false,completed:false,selected:null};
-});
+function emptyState() {
+  const s = {
+    currentSection: 'dashboard',
+    currentTenseId: null,
+    currentGrammarId: null,
+    quizStates: {},
+    grammarQuizStates: {},
+    mixedQuizState: {current:0, score:0, answered:false, completed:false, selected:null},
+    practiceRevealed: Array(PRACTICE_EXERCISES.length).fill(false),
+    completedTenses: [],
+    completedGrammar: []
+  };
+  TENSES.forEach(t=>{s.quizStates[t.id]={current:0,score:0,answered:false,completed:false,selected:null};});
+  GRAMMAR.forEach(g=>{s.grammarQuizStates[g.id]={current:0,score:0,answered:false,completed:false,selected:null};});
+  return s;
+}
+
+function persistProgress() {
+  try {
+    const data = {
+      quizStates: state.quizStates,
+      grammarQuizStates: state.grammarQuizStates,
+      mixedQuizState: state.mixedQuizState,
+      practiceRevealed: state.practiceRevealed,
+      completedTenses: [...state.completedTenses],
+      completedGrammar: [...state.completedGrammar]
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  } catch(e) {}
+}
+
+function loadProgress() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(!raw) return;
+    const data = JSON.parse(raw);
+    if(data.quizStates) Object.assign(state.quizStates, data.quizStates);
+    if(data.grammarQuizStates) Object.assign(state.grammarQuizStates, data.grammarQuizStates);
+    if(data.mixedQuizState) Object.assign(state.mixedQuizState, data.mixedQuizState);
+    if(data.practiceRevealed) state.practiceRevealed = data.practiceRevealed;
+    if(data.completedTenses) state.completedTenses = new Set(data.completedTenses);
+    if(data.completedGrammar) state.completedGrammar = new Set(data.completedGrammar);
+    // Sync practiceRevealed length
+    while(state.practiceRevealed.length < PRACTICE_EXERCISES.length) state.practiceRevealed.push(false);
+  } catch(e) {}
+}
+
+function resetAllProgress() {
+  if(!confirm('Reset all progress? This cannot be undone.')) return;
+  localStorage.removeItem(STORAGE_KEY);
+  state = emptyState();
+  loadProgress();
+  render();
+  updateDots();
+}
+
+let state = emptyState();
+loadProgress();
+
+// ============================================================
+// HELPERS
+// ============================================================
+function calculateTotalQuizScore() {
+  let total = 0;
+  TENSES.forEach(t=>{const q=state.quizStates[t.id];if(q.completed) total+=q.score;});
+  GRAMMAR.forEach(g=>{const q=state.grammarQuizStates[g.id];if(q.completed) total+=q.score;});
+  if(state.mixedQuizState.completed) total+=state.mixedQuizState.score;
+  return total;
+}
 
 // ============================================================
 // RENDER ENGINE
 // ============================================================
-function navigateTo(section, tenseId) {
+function navigateTo(section, topicId) {
   state.currentSection = section;
-  state.currentTenseId = tenseId || null;
+  if(section==='tense') state.currentTenseId = topicId;
+  else if(section==='grammar') state.currentGrammarId = topicId;
   render();
-  // Update sidebar active state
   document.querySelectorAll('.sidebar-item').forEach(el=>el.classList.remove('active'));
   let selector;
   if(section==='dashboard') selector='[data-section="dashboard"]';
-  else if(section==='tense') selector=`[data-section="tense"][data-tense="${tenseId}"]`;
+  else if(section==='tense') selector=`[data-section="tense"][data-tense="${topicId}"]`;
+  else if(section==='grammar') selector=`[data-section="grammar"][data-grammar="${topicId}"]`;
   else if(section==='practice') selector='[data-section="practice"]';
   else if(section==='mixed-quiz') selector='[data-section="mixed-quiz"]';
   else if(section==='summary') selector='[data-section="summary"]';
   const el = document.querySelector(selector);
   if(el) el.classList.add('active');
-  // Close mobile sidebar
   document.getElementById('sidebar').classList.remove('open');
   window.scrollTo(0,0);
 }
@@ -715,6 +986,7 @@ function render() {
   switch(section) {
     case 'dashboard': renderDashboard(main); break;
     case 'tense': renderTense(main, state.currentTenseId); break;
+    case 'grammar': renderGrammar(main, state.currentGrammarId); break;
     case 'practice': renderPractice(main); break;
     case 'mixed-quiz': renderMixedQuiz(main); break;
     case 'summary': renderSummary(main); break;
@@ -723,16 +995,25 @@ function render() {
 }
 
 function updateProgress() {
-  document.getElementById('progressNum').textContent = state.completedTenses.size;
+  const total = TENSES.length + GRAMMAR.length;
+  document.getElementById('totalCount').textContent = total;
+  document.getElementById('progressNum').textContent = state.completedTenses.size + state.completedGrammar.size;
 }
 
 function updateDots() {
   TENSES.forEach(t=>{
     const dot = document.getElementById(`dot-${t.id}`);
     if(dot){
-      const qs = state.quizStates[t.id];
       if(state.completedTenses.has(t.id)) dot.className='status-dot completed';
-      else if(qs && qs.current>0) dot.className='status-dot in-progress';
+      else if(state.quizStates[t.id] && state.quizStates[t.id].current>0) dot.className='status-dot in-progress';
+      else dot.className='status-dot';
+    }
+  });
+  GRAMMAR.forEach(g=>{
+    const dot = document.getElementById(`dot-${g.id}`);
+    if(dot){
+      if(state.completedGrammar.has(g.id)) dot.className='status-dot completed';
+      else if(state.grammarQuizStates[g.id] && state.grammarQuizStates[g.id].current>0) dot.className='status-dot in-progress';
       else dot.className='status-dot';
     }
   });
@@ -742,24 +1023,35 @@ function updateDots() {
 // SECTION: DASHBOARD
 // ============================================================
 function renderDashboard(container) {
-  const completed = state.completedTenses.size;
-  const total = TENSES.length;
-  const pct = Math.round((completed/total)*100);
+  const completedT = state.completedTenses.size;
+  const completedG = state.completedGrammar.size;
+  const totalT = TENSES.length;
+  const totalG = GRAMMAR.length;
+  const total = totalT + totalG;
+  const completed = completedT + completedG;
+  const pct = total>0 ? Math.round((completed/total)*100) : 0;
   let html = `
     <div class="section-card fade-in">
-      <h2>Welcome to English Tenses</h2>
+      <h2>Welcome to English Tenses & Grammar</h2>
       <p class="subtitle">A complete interactive guide for Arabic-speaking learners</p>
       <div class="score-bar" style="margin-bottom:20px">
         <span class="score-label">Overall Progress</span>
         <span class="score-value">${completed}</span><span class="score-total">/ ${total}</span>
         <div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div>
       </div>
-      <p style="color:var(--gray-600);font-size:14px;margin-bottom:16px">
-        Click on any tense to study it. Complete the quiz after each lesson to track your progress.
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:16px">
+        <div style="text-align:center;padding:10px;background:var(--gray-50);border-radius:var(--radius);border:1px solid var(--gray-200)"><div style="font-size:22px">&#9200;</div><div style="font-size:13px;font-weight:700;color:var(--primary)">${completedT}/${totalT}</div><div style="font-size:11px;color:var(--gray-400)">Tenses Done</div></div>
+        <div style="text-align:center;padding:10px;background:var(--gray-50);border-radius:var(--radius);border:1px solid var(--gray-200)"><div style="font-size:22px">&#128214;</div><div style="font-size:13px;font-weight:700;color:var(--purple)">${completedG}/${totalG}</div><div style="font-size:11px;color:var(--gray-400)">Grammar Done</div></div>
+        <div style="text-align:center;padding:10px;background:var(--gray-50);border-radius:var(--radius);border:1px solid var(--gray-200)"><div style="font-size:22px">&#128203;</div><div style="font-size:13px;font-weight:700;color:var(--amber)">${calculateTotalQuizScore()}</div><div style="font-size:11px;color:var(--gray-400)">Correct Answers</div></div>
+        <div style="text-align:center;padding:10px;background:var(--gray-50);border-radius:var(--radius);border:1px solid var(--gray-200)"><div style="font-size:22px">&#128200;</div><div style="font-size:13px;font-weight:700;color:var(--secondary)">${pct}%</div><div style="font-size:11px;color:var(--gray-400)">Complete</div></div>
+      </div>
+      <p style="color:var(--gray-600);font-size:14px;margin-bottom:0">
+        Click on any topic to study it. Complete the quiz after each lesson to track your progress.
+        <span style="display:inline-block;margin-left:8px;cursor:pointer;color:var(--red);font-size:12px;text-decoration:underline" onclick="resetAllProgress()">Reset all progress</span>
       </p>
     </div>
     <div class="section-card fade-in">
-      <h2 style="font-size:18px">Choose a Tense to Study</h2>
+      <h2 style="font-size:18px">&#9200; Tenses</h2>
       <div class="dashboard-grid">
   `;
   const timeFrames = [
@@ -777,6 +1069,34 @@ function renderDashboard(container) {
         <div class="dash-status ${done?'complete':'in-progress'}">${done?'&#10003; Completed':'Study'}</div>
       </div>`;
     });
+  });
+  html+=`</div></div>`;
+  // Grammar card
+  html+=`
+    <div class="section-card fade-in">
+      <h2 style="font-size:18px">&#128395; Conditionals</h2>
+      <div class="dashboard-grid">
+  `;
+  GRAMMAR.filter(g=>g.category==='conditionals').forEach(g=>{
+    const done = state.completedGrammar.has(g.id);
+    html+=`<div class="dash-card" onclick="navigateTo('grammar','${g.id}')">
+      <div class="dash-icon">&#128395;</div>
+      <div class="dash-name">${g.name}</div>
+      <div class="dash-status ${done?'complete':'in-progress'}">${done?'&#10003; Completed':'Study'}</div>
+    </div>`;
+  });
+  html+=`</div></div>
+    <div class="section-card fade-in">
+      <h2 style="font-size:18px">&#128214; Essential Grammar</h2>
+      <div class="dashboard-grid">
+  `;
+  GRAMMAR.filter(g=>g.category==='essential').forEach(g=>{
+    const done = state.completedGrammar.has(g.id);
+    html+=`<div class="dash-card" onclick="navigateTo('grammar','${g.id}')">
+      <div class="dash-icon">&#128214;</div>
+      <div class="dash-name">${g.name}</div>
+      <div class="dash-status ${done?'complete':'in-progress'}">${done?'&#10003; Completed':'Study'}</div>
+    </div>`;
   });
   html+=`</div></div>`;
   container.innerHTML = html;
@@ -810,7 +1130,7 @@ function renderTense(container, tenseId) {
   if(tenseTab==='lesson'){
     html+=renderTenseLesson(tense);
   } else {
-    html+=renderTenseQuiz(tense);
+    html+=renderTenseQuiz(tense, QUIZZES[tenseId], 'tense');
   }
   html+=`</div>`;
   // Next tense button
@@ -894,14 +1214,100 @@ function renderTenseLesson(tense) {
   `;
 }
 
-function renderTenseQuiz(tense) {
-  const qs = state.quizStates[tense.id];
-  const questions = QUIZZES[tense.id];
+// ============================================================
+// SECTION: GRAMMAR LESSON + QUIZ
+// ============================================================
+let grammarTab = 'lesson';
+
+function renderGrammar(container, grammarId) {
+  const topic = GRAMMAR.find(g=>g.id===grammarId);
+  if(!topic){renderDashboard(container);return;}
+  const qs = state.grammarQuizStates[grammarId];
+  const completed = state.completedGrammar.has(grammarId);
+  const categoryIcon = topic.category==='conditionals'?'&#128395;':'&#128214;';
+  const catLabel = topic.category==='conditionals'?'Conditionals':'Essential Grammar';
+  let html = `
+    <div class="breadcrumb">
+      <span onclick="navigateTo('dashboard')">Home</span>
+      <span class="sep">/</span>
+      <span>${catLabel}</span>
+      <span class="sep">/</span>
+      <span>${topic.name}</span>
+    </div>
+    <div class="section-card fade-in">
+      <h2>${categoryIcon} ${topic.name} <span class="badge">${catLabel}</span></h2>
+      <div class="tab-bar">
+        <button class="tab-btn ${grammarTab==='lesson'?'active':''}" onclick="grammarTab='lesson';renderGrammar(document.getElementById('mainContent'),'${grammarId}')">Lesson</button>
+        <button class="tab-btn ${grammarTab==='quiz'?'active':''}" onclick="grammarTab='quiz';renderGrammar(document.getElementById('mainContent'),'${grammarId}')">Quiz ${completed?'&#10003;':''}</button>
+      </div>
+  `;
+  if(grammarTab==='lesson'){
+    html+=renderGrammarLesson(topic);
+  } else {
+    html+=renderTenseQuiz(topic, GRAMMAR_QUIZZES[grammarId], 'grammar');
+  }
+  html+=`</div>`;
+  const idx = GRAMMAR.findIndex(g=>g.id===grammarId);
+  if(idx<GRAMMAR.length-1){
+    html+=`<div style="text-align:right;margin-top:-12px;margin-bottom:24px">
+      <button class="btn btn-primary" onclick="navigateTo('grammar','${GRAMMAR[idx+1].id}')">Next: ${GRAMMAR[idx+1].name} &rarr;</button>
+    </div>`;
+  } else {
+    html+=`<div style="text-align:right;margin-top:-12px;margin-bottom:24px">
+      <button class="btn btn-primary" onclick="navigateTo('mixed-quiz')">Take Mixed Quiz &rarr;</button>
+    </div>`;
+  }
+  container.innerHTML = html;
+  updateDots();
+}
+
+function renderGrammarLesson(topic) {
+  return `
+    <p style="font-size:15px;color:var(--gray-600);margin-bottom:16px">${topic.definition}</p>
+    <div class="accordion">
+      <div class="accordion-item open">
+        <button class="accordion-header" onclick="toggleAccordion(this)">Structure / Formula <span class="icon">&#9660;</span></button>
+        <div class="accordion-body"><p>${topic.structure}</p></div>
+      </div>
+      <div class="accordion-item open">
+        <button class="accordion-header" onclick="toggleAccordion(this)">When We Use It <span class="icon">&#9660;</span></button>
+        <div class="accordion-body"><ul>${topic.usage.map(u=>`<li>${u}</li>`).join('')}</ul></div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">Signal Words / Markers <span class="icon">&#9660;</span></button>
+        <div class="accordion-body"><div class="signal-tags">${topic.signalWords.split(',').map(w=>`<span>${w.trim()}</span>`).join('')}</div></div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">Examples <span class="icon">&#9660;</span></button>
+        <div class="accordion-body">${topic.examples.map(ex=>`<div class="example-box"><p>${ex}</p></div>`).join('')}</div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">Common Mistake <span class="icon">&#9660;</span></button>
+        <div class="accordion-body"><div class="mistake-box"><div class="label">&#9888; Common Error</div><p>${topic.commonMistake.note}</p><p><span class="wrong">${topic.commonMistake.wrong}</span> &rarr; <span class="correct">${topic.commonMistake.correct}</span></p></div></div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">Compare: ${topic.name} vs ${topic.comparison.with} <span class="icon">&#9660;</span></button>
+        <div class="accordion-body"><div class="compare-box"><div class="label">&#128161; Key Difference</div><p>${topic.comparison.diff}</p></div></div>
+      </div>
+    </div>
+    <div style="text-align:right;margin-top:16px">
+      <button class="btn btn-primary" onclick="grammarTab='quiz';renderGrammar(document.getElementById('mainContent'),'${topic.id}')">Take Quiz &rarr;</button>
+    </div>`;
+}
+
+function renderTenseQuiz(topic, questions, type) {
+  const isTense = type === 'tense';
+  const qs = isTense ? state.quizStates[topic.id] : state.grammarQuizStates[topic.id];
   if(!questions || questions.length===0) return '<p>No questions available.</p>';
   const q = questions[qs.current];
   const isLast = qs.current === questions.length-1;
   const total = questions.length;
   const labels = ['a','b','c','d'];
+  const selectFn = isTense ? `selectTenseOption('${topic.id}',` : `selectGrammarOption('${topic.id}',`;
+  const submitFn = isTense ? `submitTenseAnswer('${topic.id}')` : `submitGrammarAnswer('${topic.id}')`;
+  const nextFn = isTense ? `nextTenseQuestion('${topic.id}')` : `nextGrammarQuestion('${topic.id}')`;
+  const finishFn = isTense ? `finishTenseQuiz('${topic.id}')` : `finishGrammarQuiz('${topic.id}')`;
+  const resetFn = isTense ? `resetTenseQuiz('${topic.id}')` : `resetGrammarQuiz('${topic.id}')`;
   let html = `
     <div class="score-bar">
       <span class="score-label">Score</span>
@@ -922,12 +1328,11 @@ function renderTenseQuiz(tense) {
     } else if(i===qs.selected){
       cls+=' selected';
     }
-    html+=`<div class="${cls}" onclick="selectTenseOption('${tense.id}',${i})" data-idx="${i}">
+    html+=`<div class="${cls}" onclick="${selectFn}${i})" data-idx="${i}">
       <span class="letter">${labels[i]}</span> ${opt}
     </div>`;
   });
   html+=`</div>`;
-  // Feedback
   if(qs.answered){
     const isCorrect = qs.selected === q.a;
     html+=`<div class="quiz-feedback show ${isCorrect?'correct':'wrong'}">
@@ -935,19 +1340,18 @@ function renderTenseQuiz(tense) {
       ${!isCorrect?` The correct answer is: <strong>${labels[q.a]}) ${q.o[q.a]}</strong>`:''}
     </div>`;
   }
-  // Controls
   html+=`<div class="quiz-controls">`;
   if(!qs.answered){
-    html+=`<button class="btn btn-primary" onclick="submitTenseAnswer('${tense.id}')" ${qs.selected===null?'disabled':''} id="submitBtn">Check Answer</button>`;
+    html+=`<button class="btn btn-primary" onclick="${submitFn}" ${qs.selected===null?'disabled':''} id="submitBtn">Check Answer</button>`;
   } else {
     if(isLast){
-      html+=`<button class="btn btn-success" onclick="finishTenseQuiz('${tense.id}')">See Results</button>`;
+      html+=`<button class="btn btn-success" onclick="${finishFn}">See Results</button>`;
     } else {
-      html+=`<button class="btn btn-primary" onclick="nextTenseQuestion('${tense.id}')">Next Question &rarr;</button>`;
+      html+=`<button class="btn btn-primary" onclick="${nextFn}">Next Question &rarr;</button>`;
     }
   }
   if(qs.answered){
-    html+=`<button class="btn btn-secondary" onclick="resetTenseQuiz('${tense.id}')">Reset Quiz</button>`;
+    html+=`<button class="btn btn-secondary" onclick="${resetFn}">Reset Quiz</button>`;
   }
   html+=`</div></div></div>`;
   return html;
@@ -994,6 +1398,7 @@ function finishTenseQuiz(tenseId) {
   }
   updateDots();
   updateProgress();
+  persistProgress();
   showModal(
     qs.score === total ? '&#127942;' : qs.score >= Math.ceil(total/2) ? '&#128170;' : '&#128218;',
     qs.score === total ? 'Perfect Score!' : qs.score >= Math.ceil(total/2) ? 'Good Work!' : 'Keep Practicing!',
@@ -1010,6 +1415,8 @@ function resetTenseQuiz(tenseId) {
   qs.answered = false;
   qs.selected = null;
   qs.completed = false;
+  state.completedTenses.delete(tenseId);
+  persistProgress();
   renderTense(document.getElementById('mainContent'), tenseId);
 }
 
@@ -1018,11 +1425,59 @@ function retryQuiz() {
 }
 
 // ============================================================
+// QUIZ LOGIC — Grammar
+// ============================================================
+function selectGrammarOption(topicId, idx) {
+  const qs = state.grammarQuizStates[topicId];
+  if(qs.answered) return;
+  qs.selected = idx;
+  renderGrammar(document.getElementById('mainContent'), topicId);
+}
+function submitGrammarAnswer(topicId) {
+  const qs = state.grammarQuizStates[topicId];
+  if(qs.selected===null || qs.answered) return;
+  qs.answered = true;
+  if(qs.selected === GRAMMAR_QUIZZES[topicId][qs.current].a) qs.score++;
+  renderGrammar(document.getElementById('mainContent'), topicId);
+}
+function nextGrammarQuestion(topicId) {
+  const qs = state.grammarQuizStates[topicId];
+  if(qs.current < GRAMMAR_QUIZZES[topicId].length-1){
+    qs.current++; qs.answered = false; qs.selected = null;
+  }
+  renderGrammar(document.getElementById('mainContent'), topicId);
+}
+function finishGrammarQuiz(topicId) {
+  const qs = state.grammarQuizStates[topicId];
+  const total = GRAMMAR_QUIZZES[topicId].length;
+  qs.completed = true;
+  if(qs.score >= Math.ceil(total/2)) state.completedGrammar.add(topicId);
+  updateDots(); updateProgress();
+  persistProgress();
+  showModal(
+    qs.score === total ? '&#127942;' : qs.score >= Math.ceil(total/2) ? '&#128170;' : '&#128218;',
+    qs.score === total ? 'Perfect!' : qs.score >= Math.ceil(total/2) ? 'Good Work!' : 'Keep Practicing!',
+    `${qs.score} / ${total}`,
+    qs.score === total ? 'All correct!' : qs.score >= Math.ceil(total/2) ? 'You passed. Try for perfect!' : 'Review and try again.',
+    topicId, 'grammar'
+  );
+}
+function resetGrammarQuiz(topicId) {
+  const qs = state.grammarQuizStates[topicId];
+  qs.current=0; qs.score=0; qs.answered=false; qs.selected=null; qs.completed=false;
+  state.completedGrammar.delete(topicId);
+  persistProgress();
+  renderGrammar(document.getElementById('mainContent'), topicId);
+}
+
+// ============================================================
 // MODAL
 // ============================================================
 let modalTenseId = null;
-function showModal(icon, title, score, msg, tenseId) {
-  modalTenseId = tenseId || null;
+let modalGrammatical = false;
+function showModal(icon, title, score, msg, topicId, isGrammar) {
+  modalTenseId = topicId || null;
+  modalGrammatical = isGrammar || false;
   document.getElementById('modalIcon').innerHTML = icon;
   document.getElementById('modalTitle').textContent = title;
   document.getElementById('modalScore').textContent = score;
@@ -1067,6 +1522,7 @@ function renderPractice(container) {
 
 function revealPracticeAnswer(idx) {
   state.practiceRevealed[idx] = !state.practiceRevealed[idx];
+  persistProgress();
   renderPractice(document.getElementById('mainContent'));
 }
 
@@ -1159,16 +1615,18 @@ function finishMixedQuiz() {
   const total = MIXED_QUIZ.length;
   mq.completed = true;
   let icon, title, msg;
-  if(mq.score === total){icon='&#127942;';title='Perfect Score!';msg='You mastered all tenses! Excellent work!';}
-  else if(mq.score >= 10){icon='&#128170;';title='Great Job!';msg='You have a strong understanding of English tenses.';}
-  else if(mq.score >= 7){icon='&#128221;';title='Good Effort!';msg='Keep practicing to improve your score.';}
+  if(mq.score === total){icon='&#127942;';title='Perfect Score!';msg='You mastered everything! Excellent work!';}
+  else if(mq.score >= 20){icon='&#128170;';title='Great Job!';msg='You have a very strong understanding.';}
+  else if(mq.score >= 14){icon='&#128221;';title='Good Effort!';msg='Keep practicing to improve your score.';}
   else {icon='&#128218;';title='Keep Studying';msg='Review the lessons and try again.';}
+  persistProgress();
   showModal(icon, title, `${mq.score} / ${total}`, msg, null);
   renderMixedQuiz(document.getElementById('mainContent'));
 }
 
 function resetMixedQuiz() {
   state.mixedQuizState = {current:0,score:0,answered:false,completed:false,selected:null};
+  persistProgress();
   renderMixedQuiz(document.getElementById('mainContent'));
 }
 
@@ -1193,6 +1651,24 @@ function renderSummary(container) {
       <td style="font-size:12px">${t.structure.split('<br>')[0]}</td>
       <td style="font-size:12px">${t.usage[0]}</td>
       <td style="font-size:12px">${t.examples[0]}</td>
+    </tr>`;
+  });
+  html+=`</tbody></table></div>`;
+
+  // Grammar summary table
+  html+=`
+    <h3 style="font-size:17px;margin:24px 0 10px">Grammar &amp; Conditionals Summary</h3>
+    <div style="overflow-x:auto">
+    <table class="summary-table">
+      <thead><tr><th>Topic</th><th>Structure</th><th>Main Use</th><th>Example</th></tr></thead>
+      <tbody>
+  `;
+  GRAMMAR.forEach(g=>{
+    html+=`<tr>
+      <td class="grammar-name">${g.name}</td>
+      <td style="font-size:12px">${g.structure.split('<br>')[0]}</td>
+      <td style="font-size:12px">${g.usage[0]}</td>
+      <td style="font-size:12px">${g.examples[0]}</td>
     </tr>`;
   });
   html+=`</tbody></table></div>`;
@@ -1297,8 +1773,30 @@ document.getElementById('hamburgerBtn').addEventListener('click',function(){
   document.getElementById('sidebar').classList.toggle('open');
 });
 
+// Theme toggle
+function toggleTheme() {
+  const html = document.documentElement;
+  const current = html.getAttribute('data-theme');
+  const next = current === 'dark' ? '' : 'dark';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('english_tenses_theme', next);
+  document.getElementById('themeToggle').textContent = next === 'dark' ? '\u2600\uFE0F' : '\uD83C\uDF19';
+}
+(function(){
+  const saved = localStorage.getItem('english_tenses_theme');
+  if(saved === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    document.getElementById('themeToggle').textContent = '\u2600\uFE0F';
+  }
+})();
+
 // Init
 navigateTo('dashboard');
+
+// Keyboard shortcuts
+document.addEventListener('keydown', function(e) {
+  if(e.key === 'd' && e.ctrlKey && e.shiftKey) { e.preventDefault(); toggleTheme(); }
+});
 </script>
 </body>
 </html>
