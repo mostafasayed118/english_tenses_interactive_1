@@ -390,7 +390,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--
     <p class="modal-msg" id="modalMsg">You completed the quiz.</p>
     <div class="modal-actions">
       <button class="btn btn-secondary" onclick="closeModal()">Close</button>
-      <button class="btn btn-primary" id="modalRetryBtn" onclick="closeModal();if(modalGrammatical&&modalTenseId)resetGrammarQuiz(modalTenseId);else if(modalTenseId)resetTenseQuiz(modalTenseId)">Retry</button>
+      <button class="btn btn-primary" id="modalRetryBtn" onclick="retryFromModal()">Retry</button>
     </div>
   </div>
 </div>
@@ -1404,7 +1404,7 @@ function finishTenseQuiz(tenseId) {
     qs.score === total ? 'Perfect Score!' : qs.score >= Math.ceil(total/2) ? 'Good Work!' : 'Keep Practicing!',
     `${qs.score} / ${total}`,
     qs.score === total ? 'You answered all questions correctly!' : qs.score >= Math.ceil(total/2) ? 'You passed the quiz. Try to get a perfect score!' : 'Review the lesson and try again.',
-    tenseId
+    tenseId, 'tense'
   );
 }
 
@@ -1422,6 +1422,21 @@ function resetTenseQuiz(tenseId) {
 
 function retryQuiz() {
   // handled in modal
+}
+
+function retryFromModal() {
+  closeModal();
+  if(modalTenseId && modalType === 'grammar') {
+    resetGrammarQuiz(modalTenseId);
+    grammarTab = 'quiz';
+    renderGrammar(document.getElementById('mainContent'), modalTenseId);
+  } else if(modalTenseId && modalType === 'tense') {
+    resetTenseQuiz(modalTenseId);
+    tenseTab = 'quiz';
+    renderTense(document.getElementById('mainContent'), modalTenseId);
+  } else {
+    resetMixedQuiz();
+  }
 }
 
 // ============================================================
@@ -1474,10 +1489,10 @@ function resetGrammarQuiz(topicId) {
 // MODAL
 // ============================================================
 let modalTenseId = null;
-let modalGrammatical = false;
-function showModal(icon, title, score, msg, topicId, isGrammar) {
+let modalType = 'tense';
+function showModal(icon, title, score, msg, topicId, type) {
   modalTenseId = topicId || null;
-  modalGrammatical = isGrammar || false;
+  modalType = type || 'tense';
   document.getElementById('modalIcon').innerHTML = icon;
   document.getElementById('modalTitle').textContent = title;
   document.getElementById('modalScore').textContent = score;
@@ -1620,7 +1635,7 @@ function finishMixedQuiz() {
   else if(mq.score >= 14){icon='&#128221;';title='Good Effort!';msg='Keep practicing to improve your score.';}
   else {icon='&#128218;';title='Keep Studying';msg='Review the lessons and try again.';}
   persistProgress();
-  showModal(icon, title, `${mq.score} / ${total}`, msg, null);
+  showModal(icon, title, `${mq.score} / ${total}`, msg, null, 'mixed');
   renderMixedQuiz(document.getElementById('mainContent'));
 }
 
